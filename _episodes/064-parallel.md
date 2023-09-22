@@ -25,12 +25,15 @@ To understand the difference we first need to clarify some terms.
    file="/fig/clusterDiagram.png"
    alt="Node anatomy" caption="" %}
 
-CPU: Unit that does the computations.
-Task: One or more CPUs that share memory.
-Node: The physical hardware. The upper limit on how many CPUs can be in a task.
+**CPU**: Unit that does the computations.
 
-Shared Memory Parallelism is when multiple CPUs are used within a single task.
-Distributed Memory Parallelism is when multiple tasks are used.
+**Task**: One or more CPUs that share memory.
+
+**Node**: The physical hardware. The upper limit on how many CPUs can be in a task.
+
+**Shared Memory**: When multiple CPUs are used within a single task.
+
+**Distributed Memory**: When multiple tasks are used.
 
 Which methods are available to you is largely dependent on the nature of the problem and software being used.
 
@@ -53,7 +56,54 @@ Shared memory parallelism is what is used in our example script `array_sum.r`.
 
 Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 
-{% include {{ site.snippets }}/parallel/smp-example.snip %}
+{% capture example_smp %}
+> {% include example_scripts/example_smp.sl %}
+{% endcapture %}
+
+
+
+> ## Shared Memory Example
+>
+> Create a new script called `example_smp.sl`
+>
+> ```
+> #!/bin/bash -e
+> 
+> #SBATCH --job-name        smp_job
+> #SBATCH --output          %x.out
+> #SBATCH --mem-per-cpu     500
+> #SBATCH --cpus-per-task   8
+> 
+> bash whothis.sh
+```
+> {: .language-bash}
+>
+> then submit with
+>
+{: .challenge}
+
+
+> ```
+> {{ site.remote.prompt }} sbatch example_smp.sl
+> ```
+> {: .language-bash}
+>
+> > ## Solution
+> >
+> > Checking the output should reveal
+> >
+> > ```
+> > {{ site.remote.prompt }} cat smp_job.out
+> > ```
+> > {: .language-bash}
+> >
+> > ```
+> > I am task #0 running on node 'wbn224' with 8 CPUs
+> > ```
+> >
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 ### Distributed-Memory (MPI)
 
@@ -69,11 +119,81 @@ Number of tasks to use is specified by the Slurm option `--ntasks`, because the 
 
 Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-task` unspecified will get you `2`.
 
-{% include {{ site.snippets }}/parallel/mpi-example.snip %}
+> ## Distributed Memory Example
+>
+> Create a new script called `example_mpi.sl`
+>
+> ```
+> #!/bin/bash -e
+>
+> #SBATCH --job-name            mpi_job
+> #SBATCH --output          %x.out
+> #SBATCH --mem-per-cpu     500
+> #SBATCH --ntasks          4
+> 
+> srun bash whothis.sh
+> ```
+> {: .language-bash}
+> 
+> then submit with 
+> 
+> ```
+> {{ site.remote.prompt }} sbatch example_mpi.sl
+> ```
+> {: .language-bash}
+> > ## Solution
+> > 
+> > ```
+> > {{ site.remote.prompt }} cat mpi_job.out
+> > ```
+> > {: .language-bash}
+> >
+> >```
+> > I am task #1 running on node 'wbn012' with 2 CPUs
+> > I am task #3 running on node 'wbn010' with 2 CPUs
+> > I am task #0 running on node 'wbn009' with 2 CPUs
+> > I am task #2 running on node 'wbn063' with 2 CPUs
+> > ```
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 Using a combination of Shared and Distributed memory is called _Hybrid Parallel_.
 
-{% include {{ site.snippets }}/parallel/hyb-example.snip %}
+> ## Hybrid Example
+> 
+> ```
+> #!/bin/bash -e
+> 
+> #SBATCH --job-name        hybrid_job
+> #SBATCH --output          %x.out
+> #SBATCH --mem-per-cpu     500
+> #SBATCH --ntasks          2
+> #SBATCH --cpus-per-task   4
+> 
+> srun bash whothis.sh
+> ```
+> {: .language-bash}
+>
+> ```
+> {{ site.remote.prompt }} sbatch example_hybrid.sl
+> ```
+> {: .language-bash}
+> 
+> > ## Solution
+> > 
+> > ```
+> > {{ site.remote.prompt }} cat hybrid_job.out
+> >
+> > ```
+> > 
+> > ```
+> > I am task #0 running on node 'wbn016' with 4 CPUs
+> > I am task #1 running on node 'wbn022' with 4 CPUs
+> > ```
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 ### Job Array
 
@@ -89,7 +209,55 @@ A job array can be specified using `--array`
 
 If you are writing your own code, then this is something you will probably have to specify yourself.
 
-{% include {{ site.snippets }}/parallel/array-example.snip %}
+> ## Job Array Example
+> 
+> Create a new script called `example_jobarray.sl`
+>
+> ```
+> #!/bin/bash -e
+>
+> #SBATCH --job-name        job_array
+> #SBATCH --output          %x_%a.out
+> #SBATCH --mem-per-cpu     500
+> #SBATCH --array           0-3
+> 
+> bash whothis.sh
+> ```
+> {: .language-bash}
+> 
+> then submit with
+> 
+> ```
+> {{ site.remote.prompt }} sbatch example_jobarray.sl
+> ```
+> {: .language-bash}
+> 
+> > ## Solution
+> > 
+> > ```
+> > ls
+> > ```
+> > {: .language-bash}
+> >
+> > ```
+> > job_array_0.out job_array_1.out job_array_2.out job_array_3.out
+> > ```
+> > {: .output}
+> > 
+> > Each of which should contain,
+> > 
+> > 
+> > ```
+> >  {{ site.remote.prompt }} cat job_array_*.out
+> > ```
+> > {: .language-bash}
+> >
+> > ```
+> > I am task #0 running on node 'wbn*' with 2 CPUs
+> > ```
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 ## How to Utilise Multiple CPUs
 
@@ -99,7 +267,7 @@ Generally speaking, Parallelism is either _implicit_ where the software figures 
 
 ### Scientific Software
 
-The first step when looking to run particular software should always be to read the ███████ documentation.
+The first step when looking to run particular software should always be to read the documentation.
 On one end of the scale, some software may claim to make use of multiple cores implicitly, but this should be verified as the methods used to determine available resources are not guaranteed to work.
 
 Some software will require you to specify number of cores (e.g. `-n 8` or `-np 16`), or even type of paralellisation (e.g. `-dis` or `-mpi=intelmpi`).
@@ -116,9 +284,12 @@ It is important to determine this before you start requesting more resources thr
 If you are writing your own code, some programming languages will have functions that can make use of multiple CPUs without requiring you to changes your code.
 However, unless that function is where the majority of time is spent, this is unlikely to give you the performance you are looking for.
 
+
 {%- comment -%} (matlab, numpy?) {%- endcomment -%}
 
 Python [Multiproccessing](https://docs.python.org/3/library/multiprocessing.html)
+
+
 MATLAB [Parpool](https://au.mathworks.com/help/parallel-computing/parpool.html)
 
 {% include links.md %}
