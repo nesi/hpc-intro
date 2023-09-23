@@ -52,7 +52,7 @@ Often called `Multithreading`.
 
 This means that all CPUs must be on the same node, most Mahuika nodes have 72 CPUs.
 
-Shared memory parallelism is what is used in our example script `array_sum.r`.
+Shared memory parallelism is what is used in our example script `{{ site.example.script }} `.
 
 Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 

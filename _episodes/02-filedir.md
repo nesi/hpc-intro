@@ -664,10 +664,10 @@ draft.txt
 {: .output}
 ## Copying files and directories
 
-In a future lesson, we will be running the R script ```{{ site.working_dir | join: '/' }}/array_sum.r```, but as we can't all work on the same file at once you will need to take your own copy. This can be done with the **c**o**p**y command `cp`, at least two arguments are needed the file (or directory) you want to copy, and the directory (or file) where you want the copy to be created. We will be copying the file into the directory we made previously, as this should be your current directory the second argument can be a simple `.`.
+In a future lesson, we will be running the R script ```{{ site.working_dir | join: '/' }}/{{ site.example.script }} ```, but as we can't all work on the same file at once you will need to take your own copy. This can be done with the **c**o**p**y command `cp`, at least two arguments are needed the file (or directory) you want to copy, and the directory (or file) where you want the copy to be created. We will be copying the file into the directory we made previously, as this should be your current directory the second argument can be a simple `.`.
 
 ```
-{{ site.remote.prompt }} cp {{ site.working_dir | join: '/' }}/array_sum.r .
+{{ site.remote.prompt }} cp {{ site.working_dir | join: '/' }}/{{ site.example.script }}  .
 ```
 {: .output}
 
@@ -680,7 +680,7 @@ We can check that it did the right thing using `ls`
 {: .language-bash}
 
 ```
-draft.txt   array_sum.r
+draft.txt   {{ site.example.script }} 
 ```
 {: .output}
 

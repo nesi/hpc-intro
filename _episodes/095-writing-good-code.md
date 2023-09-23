@@ -40,7 +40,7 @@ matlab -r matlab_script
 In this lesson we will take a look at a few of the things to watch out for when writing scripts for use on the cluster.
 This will be most relevant to people writing their own code, but covers general practices applicable to everyone.
 
-Lets have a look at the script we ran before, `array_sum.r`, 
+Lets have a look at the script we ran before, `{{ site.example.script }} `, 
 
 > ## Using R commands
 >
@@ -48,7 +48,7 @@ Lets have a look at the script we ran before, `array_sum.r`,
 {: .callout}
 
 ```
-{% include example_scripts/array_sum.r %}
+{% include example_scripts/{{ site.example.script }}  %}
 ```
 {: .language-r}
 
