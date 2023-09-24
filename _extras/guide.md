@@ -10,11 +10,11 @@ The following list captures terms that need to be added to this glossary. This
 is a great way to contribute.
 
 {:auto_ids}
-[Accelerator](https://en.wikipedia.org/wiki/Hardware_acceleration)
+<!-- [Accelerator](https://en.wikipedia.org/wiki/Hardware_acceleration)
 :    *to be defined*
 
 [Beowulf cluster](https://en.wikipedia.org/wiki/Beowulf_cluster)
-:    *to be defined*
+:    *to be defined* -->
 
 [Central processing unit](https://en.wikipedia.org/wiki/CPU)
 :     or simply *processor* is the (hardware) component of a computer that
@@ -24,8 +24,8 @@ is a great way to contribute.
       **core** is a separate physical implementation of the electronic
       circuitry required to execute instructions.
 
-[Cloud computing](https://en.wikipedia.org/wiki/Cloud_computing)
-:    *to be defined*
+[Cloud (computing)](https://en.wikipedia.org/wiki/Cloud_computing)
+:    Virtualised remote computing resources that can be provisioned and deprovisioned as needed.
 
 [Cluster](https://en.wikipedia.org/wiki/Computer_cluster)
 :     a collection of computers configured to enable collaboration on a common
@@ -33,7 +33,7 @@ is a great way to contribute.
       and software (e.g. workload management).
 
 [Distributed memory](https://en.wikipedia.org/wiki/Distributed_memory)
-:    *to be defined*
+:    When multiple tasks are used.
 
 [Grid computing](https://en.wikipedia.org/wiki/Grid_computing)
 :    *to be defined*
@@ -60,7 +60,7 @@ is a great way to contribute.
 :    *to be defined*
 
 [Shared memory](https://en.wikipedia.org/wiki/Shared_memory)
-:    *to be defined*
+:    Using multiple CPUs per task. 
 
 [Slurm](https://en.wikipedia.org/wiki/Slurm_Workload_Manager)
 :    *to be defined*
@@ -77,3 +77,13 @@ https://www.hpcnotes.com/2015/10/essential-analogies-for-hpc-advocate.html)
 
 [Parallel File System](https://en.wikipedia.org/wiki/Distributed_file_systems)
 :    *to be defined*
+
+[Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell))
+:     (Bourne Again Shell), is the default shell for many Linux distrubutions.
+      It is the primary tool we use for batch proccessing.
+
+[Shell](https://en.wikipedia.org/wiki/Shell_(computing))
+:     Computer program that exposes an operating system's services to a human user or other programs.
+
+[Batch Programming](https://en.wikipedia.org/wiki/Batch_processing)
+:     Automating running of more than one command, usually through the use of a batch script (not to be confused with a Bash script).

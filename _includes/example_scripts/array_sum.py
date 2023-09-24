@@ -14,7 +14,7 @@ def do_par(z):
 
 num_cpus = int(os.getenv("SLURM_CPUS_PER_TASK", "1"))
 size_x = 60000  # This on makes memorier
-size_y = 20000  # This one to make longer
+size_y = 40000  # This one to make longer
 
 # Time = (size_x/n) * size_y + c
 # Mem  = (size_x * n) * c1 + size_y * c2

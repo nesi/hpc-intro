@@ -50,7 +50,7 @@ sched:
 # # For 'R'
 # example:
 #   lang: "R"
-#   shell: "Rscript"
+#   shell: "{{ site.example.shell }} "
 #   script: "array_sum.r"
 #   module: "R/4.3.1-gimkl-2022a"
 
@@ -59,7 +59,7 @@ example:
   lang: "Python"
   shell: "python"
   script: "array_sum.py"
-  module: "Python"
+  module: "Python/3.11.3-gimkl-2022a"
 
 episode_order:
   - 01-cluster
@@ -69,10 +69,10 @@ episode_order:
   - 05-scheduler
   - 06-lunch
   - 07-resources
+  - 095-writing-good-code
   - 08-break2
   - 064-parallel
   - 09-scaling
-  # - 095-writing-good-code
 
 
 #------------------------------------------------------------
@@ -110,7 +110,7 @@ working_dir:
 
 # Start time in minutes (0 to be clock-independent, 540 to show a start at 09:00 am).
 # 600 is 10am
-start_time: 600
+start_time: 540
 # Start time for people wanting to skip bash content
 hpc_start_time: 780
 # Lesson to start at.

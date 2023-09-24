@@ -1,7 +1,7 @@
 ---
 title: "What is Parallel Computing"
-teaching: 15
-exercises: 5
+teaching: 30
+exercises: 20
 questions:
 - "How do we execute a task in parallel?"
 - "What benefits arise from parallel execution?"
@@ -285,11 +285,9 @@ If you are writing your own code, some programming languages will have functions
 However, unless that function is where the majority of time is spent, this is unlikely to give you the performance you are looking for.
 
 
-{%- comment -%} (matlab, numpy?) {%- endcomment -%}
-
-Python [Multiproccessing](https://docs.python.org/3/library/multiprocessing.html)
+*Python: [Multiproccessing](https://docs.python.org/3/library/multiprocessing.html)* (not to be confused with `threading` which is not really parallel.)
 
 
-MATLAB [Parpool](https://au.mathworks.com/help/parallel-computing/parpool.html)
+*MATLAB: [Parpool](https://au.mathworks.com/help/parallel-computing/parpool.html)*
 
 {% include links.md %}
