@@ -47,19 +47,19 @@ sched:
   efficiency: "nn_seff"
   projectcode: "nesi99991"
 
-# # For 'R'
-# example:
-#   lang: "R"
-#   shell: "{{ site.example.shell }} "
-#   script: "array_sum.r"
-#   module: "R/4.3.1-gimkl-2022a"
-
 # For 'R'
 example:
-  lang: "Python"
-  shell: "python"
-  script: "array_sum.py"
-  module: "Python/3.11.3-gimkl-2022a"
+  lang: "R"
+  shell: "Rscript "
+  script: "array_sum.r"
+  module: "R/4.3.1-gimkl-2022a"
+
+# For 'python'
+# example:
+#   lang: "Python"
+#   shell: "python"
+#   script: "array_sum.py"
+#   module: "Python/3.11.3-gimkl-2022a"
 
 episode_order:
   - 01-cluster
