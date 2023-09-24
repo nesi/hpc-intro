@@ -180,12 +180,15 @@ For convenience, NeSI has provided the command `nn_seff <jobid>` to calculate **
 
 Knowing what we do now about job efficiency, lets submit the previous job again but with more appropriate resources.
 
+```
 {% include example_scripts/example-job.sl.2 %}
+```
+{: .language-bash}
+
 
 ```
 {{ site.remote.prompt }} sbatch example-job.sl
 ```
-
 {: .language-bash}
 
 Hopefully we will have better luck with this one!
