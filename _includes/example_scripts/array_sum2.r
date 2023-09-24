@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+#!/usr/bin/env {{ site.example.shell }} 
 
 library(doParallel)
 

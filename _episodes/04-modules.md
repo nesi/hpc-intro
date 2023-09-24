@@ -1,6 +1,6 @@
 ---
 title: "Accessing software via Modules"
-teaching: 20
+teaching: 30
 exercises: 10
 questions:
 - "How do we load and unload software packages?"
@@ -98,8 +98,7 @@ We can get a full list of environment variables using the command,
 {: .language-bash}
 {% include {{ site.snippets }}/modules/env-output.snip %}
 
-> These variables control many aspects of how your terminal, and any software launched from your terminal works.
-{: .callout}
+These variables control many aspects of how your terminal, and any software launched from your terminal works.
 
 ## Environment Modules
 

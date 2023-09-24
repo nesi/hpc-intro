@@ -1,7 +1,7 @@
 ---
 title: "Writing good code"
-teaching: 10
-exercises: 5
+teaching: 20
+exercises: 10
 questions:
 - "How do we write a good job script."
 objectives:
@@ -15,11 +15,11 @@ keypoints:
 When talking about 'a script' we could be referring to multiple things.
 
 * Slurm/Bash script - Almost everyone will be using one of these to submit their Slurm jobs.
-* Work script - If your work involves running another script (usually in a language other than Bash, Python, R, MATLAB, etc) that will have to be invoked in your bash script.
+* Work script - If your work involves running another script (usually in a language other than Bash like Python, R or MATLAB) that will have to be invoked in your bash script.
 
-This section will cover best practice for both types of script. 
+This section will cover best practice for both types of script.
 
-```
+<!-- ```
 python python_script.py
 ```
 {: .language-bash}
@@ -33,33 +33,122 @@ rscript r_script.r
 ```
 matlab -r matlab_script
 ```
-{: .language-bash}
+{: .language-bash} -->
 
 ## Use environment variables
 
 In this lesson we will take a look at a few of the things to watch out for when writing scripts for use on the cluster.
 This will be most relevant to people writing their own code, but covers general practices applicable to everyone.
 
-Lets have a look at the script we ran before, `array_sum.r`, 
+There is a lot of useful information contained within environment variable.
 
-> ## Using R commands
+> ## Slurm Environment
 >
-> If you are unfamiliar with R, don't worry there are equivalent operations in any language you choose to use.
+> For a small demo of the sort of useful info contained within env variables, run the command.
+>
+> ```
+> sbatch --output "slurm_env.out" --wrap "env | grep"
+> ```
+> {: .language-bash}
+>
+> once the job has finished check the results with,
+>
+> ```
+> cat slurm_env.out
+> ```
+> {: .language-bash}
+>
+> ```
+> SLURM_JOB_START_TIME=1695513911
+> SLURM_NODELIST=wbn098
+> SLURM_JOB_NAME=wrap
+> SLURMD_NODENAME=wbn098
+> SLURM_TOPOLOGY_ADDR=top.s13.s7.wbn098
+> SLURM_PRIO_PROCESS=0
+> SLURM_NODE_ALIASES=(null)
+> SLURM_JOB_QOS=staff
+> SLURM_TOPOLOGY_ADDR_PATTERN=switch.switch.switch.node
+> SLURM_JOB_END_TIME=1695514811
+> SLURM_MEM_PER_CPU=512
+> SLURM_NNODES=1
+> SLURM_JOBID=39572365
+> SLURM_TASKS_PER_NODE=2
+> SLURM_WORKING_CLUSTER=mahuika:hpcwslurmctrl01:6817:9984:109
+> SLURM_CONF=/etc/opt/slurm/slurm.conf
+> SLURM_JOB_ID=39572365
+> SLURM_JOB_USER=cwal219
+> __LMOD_STACK_SLURM_I_MPI_PMI_LIBRARY=L29wdC9zbHVybS9saWI2NC9saWJwbWkyLnNv
+> SLURM_JOB_UID=201333
+> SLURM_NODEID=0
+> SLURM_SUBMIT_DIR=/scale_wlg_persistent/filesets/home/cwal219
+> SLURM_TASK_PID=8747
+> SLURM_CPUS_ON_NODE=2
+> SLURM_PROCID=0
+> SLURM_JOB_NODELIST=wbn098
+> SLURM_LOCALID=0
+> SLURM_JOB_GID=201333
+> SLURM_JOB_CPUS_PER_NODE=2
+> SLURM_CLUSTER_NAME=mahuika
+> SLURM_GTIDS=0
+> SLURM_SUBMIT_HOST=wbn003
+> SLURM_JOB_PARTITION=large
+> SLURM_JOB_ACCOUNT=nesi99999
+> SLURM_JOB_NUM_NODES=1
+> SLURM_SCRIPT_CONTEXT=prolog_task
+> ```
+> {: .output}
+>
+> Can you think of some examples as to how these variables could be used in your script?
+
+> > ## Solution
+> > 
+> > * `SLURM_JOB_CPUS_PER_NODE` could be used to pass CPU numbers directly to any programs being used.
+> > * Some other things.
+> {: .solution}
+{: .challenge}
+
+> ## Variables in Slurm Header
+>
+> Enviroment variables set by Slurm cannot be referenced in the Slurm header.
 {: .callout}
 
-```
-{% include example_scripts/array_sum.r %}
-```
-{: .language-r}
+## Default values
 
-Starting from the top;
+It is good practice to set default values when using enviroment variables when there is a chance they will be run in an enviroment where they may not be present. 
+
+```
+FOO="${VARIABLE:-default}"
+```
+{: .language-bash}
+
+`FOO` will be to to the value of `VARIABLE` if is set, otherwise it will be set to `default`.
+
+
+As a slight variation on the above example. (`:=` as opposed to `:-`).
+
+```
+FOO="${VARIABLE:=default}"
+```
+{: .language-bash}
+
+`FOO` will be to to the value of `VARIABLE` if is set, otherwise it will be set to `default`, `VARIABLE` will also be set to `default`.
+
+<!-- Lets have a look at the script we ran before, `{{ site.example.script }} `,
+
+> ## Using {{ site.example.lang }} commands
+>
+> If you are unfamiliar with {{ site.example.lang }}, don't worry there are equivalent operations in any language you choose to use.
+{: .callout}
+
+Starting from the top; -->
+
 
 ```
 num_cpus <- 2
 ```
 {: .language-r}
 
-The number of CPU's being used is fixed in the script. We can save time and reduce chances for making mistakes by replacing this static value with an environment variable. 
+The number of CPU's being used is fixed in the script. We can save time and reduce chances for making mistakes by replacing this static value with an environment variable.
 We can use the environment variable `SLURM_CPUS_PER_TASK`.
 
 ```
@@ -67,7 +156,7 @@ num_cpus <- strtoi(Sys.getenv('SLURM_CPUS_PER_TASK'))
 ```
 {: .language-r}
 
-Slurm sets many environment variables when starting a job, see [Slurm Documentation for the full list](https://slurm.schedmd.com/sbatch.html). 
+Slurm sets many environment variables when starting a job, see [Slurm Documentation for the full list](https://slurm.schedmd.com/sbatch.html).
 
 The problem with this approach however, is our code will throw an error if we run it on the login node, or on our local machine or anywhere else that `SLURM_CPUS_PER_TASK` is not set.
 
@@ -78,7 +167,6 @@ num_cpus <- strtoi(Sys.getenv('SLURM_CPUS_PER_TASK', unset = "1"))
 ```
 {: .language-r}
 
-
 Now if `SLURM_CPUS_PER_TASK` variable is not set, 1 CPU will be used. You could also use some other method of detecting CPUs, like `detectCores()`.
 
 ## Interoperability
@@ -86,8 +174,7 @@ Now if `SLURM_CPUS_PER_TASK` variable is not set, 1 CPU will be used. You could 
 windows + mac + linux
 headless + interactive
 
-## Verbose 
-
+## Verbose
 
 Having a printout of job progress is fine for an interactive terminal, but when you aren't seeing the updates in real time anyway, it's just bloat for your output files.
 
@@ -105,7 +192,7 @@ if (print_progress && percent_complete%%1==0){
 ```
 {: .language-r}
 
-## Reproduceability 
+## Reproduceability
 
 As this script uses [Pseudorandom number generation](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) there are a few additional factors to consider.
 It is desirable that our output be reproducible so we can confirm that changes to the code have not affected it. 
@@ -164,7 +251,13 @@ Will print your input Slurm script to you output, this can help identify when ch
 
 ## Version control
 
+Version control is when changes to a document are tracked over time.
+
 In many cases you may be using the same piece of code across multiple environments, in these situations it can be difficult to keep track of changes made and your code can begin to diverge. Setting up version control like Git can save a lot of time.
+
+### Portability
+
+
 
 ## Testing
 

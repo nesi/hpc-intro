@@ -2,7 +2,7 @@
 
 # Script for attendees joining after the bash intro.
 
-EXAMPLE_SCRIPT="array_sum.r"
+EXAMPLE_SCRIPT="{{ site.example.script }} "
 
 mkdir -vp "${USER}"
 cp -v "${EXAMPLE_SCRIPT}" "${USER}"

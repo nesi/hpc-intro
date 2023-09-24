@@ -1,5 +1,5 @@
 #!/bin/bash -e
 
-module load R/4.3.1-gimkl-2022a
-Rscript array_sum.r
+module load {{ site.example.module }}
+{{ site.example.shell }} {{ site.example.script }} 
 echo "Done!"

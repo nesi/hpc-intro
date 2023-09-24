@@ -6,5 +6,5 @@
 #SBATCH --cpus-per-task 4
 
 module load R/4.3.1-gimkl-2022a
-Rscript array_sum.r
+{{ site.example.shell }}  {{ site.example.script }} 
 echo "Done!"
