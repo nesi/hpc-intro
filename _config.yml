@@ -6,37 +6,50 @@
 #------------------------------------------------------------
 
 # Cluster host and scheduler options: the defaults come from
-# Graham at Compute Canada, running Slurm. Other options can
-# be found in the library of snippets,
+# the HPC Carpentry tutorial cluster, running Slurm. Other
+# options can be found in the library of snippets,
 # `_includes/snippets_library`. To use one, replace options
 # below with those in `_config_options.yml` from the
 # library. E.g, to customise for Cirrus at EPCC, running
-# PBS, we could replace the options below with those from
+# Slurm, we could replace the options below with those from
 # 
-# _includes/snippets_library/EPCC_Cirrus_pbs/_config_options.yml
+# _includes/snippets_library/EPCC_Cirrus_slurm/_config_options.yml
 # 
 # If your cluster is not represented in the library, please
 # copy an existing folder, rename it, and customize for your
 # installation. Remember to keep the leading slash on the
 # `snippets` variable below!
 
-snippets: "/snippets_library/ComputeCanada_Graham_slurm"
+# ---------------------------------------------------------------
+# HPC Carpentries in the Cloud: Slurm + Software Stack from EESSI
+# ---------------------------------------------------------------
+#
+# The HPC Carpentry Cluster in the Cloud is provided as a public
+# service by volunteers. It is provisioned with Magic Castle
+# <https://github.com/ComputeCanada/magic_castle> using the EESSI
+# <https://eessi.github.io/docs/> software stack. If you need an
+# account, please visit <cluster.hpc-carpentry.org>.
+#
+# Compute responsibly.
+
+snippets: "/snippets_library/HPCC_MagicCastle_slurm"
 
 local:
-  prompt: "[user@laptop ~]$"
+  prompt: "[you@laptop:~]$"
   bash_shebang: "#!/usr/bin/env bash"
 
 remote:
-  name: "Graham"
-  login: "graham.computecanada.ca"
-  host: "gra-login1"
-  node: "aci-377"
-  location: "University of Waterloo"
+  name: "HPC Carpentry's Cloud Cluster"
+  login: "cluster.hpc-carpentry.org"
+  portal: "https://mokey.cluster.hpc-carpentry.org"
+  host: "login1"
+  node: "node1"
+  location: "cluster.hpc-carpentry.org"
   homedir: "/home"
   user: "yourUsername"
-  prompt: "[yourUsername@gra-login1 ~]$"
-  module_python3: "python3"
-  bash_shebang: "#!/usr/bin/env bash"
+  module_python3: "Python"
+  prompt: "[yourUsername@login1 ~]$"
+  bash_shebang: "#!/bin/bash"
 
 sched:
   name: "Slurm"
@@ -44,8 +57,8 @@ sched:
     name: "sbatch"
     options: ""
   queue:
-    debug: "debug"
-    testing: "testing"
+    debug: "smnode"
+    testing: "cpubase_bycore_b1"
   status: "squeue"
   flag:
     user: "-u yourUsername"
@@ -61,17 +74,19 @@ sched:
   info: "sinfo"
   comment: "#SBATCH"
   hist: "sacct -u yourUsername"
+  hist_filter: ""
 
 episode_order:
   - 10-hpc-intro
   - 11-connecting
   - 12-cluster
   - 13-scheduler
-  - 14-modules
-  - 15-transferring-files
-  - 16-parallel
-  - 17-resources
-  - 18-responsibility
+  - 14-environment-variables
+  - 15-modules
+  - 16-transferring-files
+  - 17-parallel
+  - 18-resources
+  - 19-responsibility
 
 #------------------------------------------------------------
 # Values for this lesson
@@ -81,7 +96,7 @@ episode_order:
 # "swc": Software Carpentry
 # "dc":  Data Carpentry
 # "lc":  Library Carpentry
-# "cp":  Carpentries (e.g., instructor traning)
+# "cp":  Carpentries (e.g., instructor training)
 carpentry: "incubator"
 
 # Overall title for pages.
