@@ -1,5 +1,5 @@
 ---
 title: "Lunch"
 layout: break
-break: 60
+break: 45
 ---
