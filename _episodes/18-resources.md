@@ -9,8 +9,7 @@ objectives:
 - "Look up job statistics."
 - "Make more accurate resource requests in job scripts based on data describing past performance."
 keypoints:
-- "Accurate job scripts help the queuing system efficiently allocate
-  shared resources."
+- "Accurate job scripts help the queuing system efficiently allocate shared resources."
 ---
 
 We've touched on all the skills you need to interact with an HPC cluster:
