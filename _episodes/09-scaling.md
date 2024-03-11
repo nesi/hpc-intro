@@ -1,6 +1,6 @@
 ---
 title: "Scaling"
-teaching: 10
+teaching: 5
 exercises: 30
 questions:
 - "How do we go from running a job on a small number of CPUs to a larger one."

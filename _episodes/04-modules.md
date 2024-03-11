@@ -1,6 +1,6 @@
 ---
 title: "Accessing software via Modules"
-teaching: 30
+teaching: 20
 exercises: 10
 questions:
 - "How do we load and unload software packages?"
