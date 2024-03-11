@@ -1,6 +1,17 @@
 #------------------------------------------------------------
 # NeSI: Mahuika + SLURM
 #------------------------------------------------------------
+
+# Cluster host and scheduler options: the defaults come from
+# the HPC Carpentry tutorial cluster, running Slurm. Other
+# options can be found in the library of snippets,
+# `_includes/snippets_library`. To use one, replace options
+# below with those in `_config_options.yml` from the
+# library. E.g, to customise for Cirrus at EPCC, running
+# Slurm, we could replace the options below with those from
+# 
+# _includes/snippets_library/EPCC_Cirrus_slurm/_config_options.yml
+# 
 # If your cluster is not represented in the library, please
 # copy an existing folder, rename it, and customize for your
 # installation. Remember to keep the leading slash on the
@@ -9,12 +20,13 @@
 snippets: "/snippets_library/NeSI_Mahuika_slurm"
 
 local:
-  prompt: "[user@laptop ~]$"
+  prompt: "[you@laptop:~]$"
   bash_shebang: "#!/usr/bin/env bash"
 
 remote:
   name: "mahuika"
   login: "nesi.org.nz"
+  portal: ""
   host: "mahuika02"
   node: "mahuika02"
   location: "Greta Point Datacenter"
@@ -22,6 +34,8 @@ remote:
   user: "yourUsername"
   prompt: "[yourUsername@mahuika ~]$"
   bash_shebang: "#!/bin/bash -e"
+  module_python3: "Python"
+
 
 sched:
   name: "Slurm"
@@ -30,6 +44,7 @@ sched:
     options: ""
   queue:
     debug: "debug"
+    testing: ""
   status: "squeue"
   flag:
     user: "-u yourUsername"
@@ -83,7 +98,7 @@ episode_order:
 # "swc": Software Carpentry
 # "dc":  Data Carpentry
 # "lc":  Library Carpentry
-# "cp":  Carpentries (e.g., instructor traning)
+# "cp":  Carpentries (e.g., instructor training)
 carpentry: "incubator"
 
 # Overall title for pages.

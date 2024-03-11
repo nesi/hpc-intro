@@ -38,7 +38,7 @@ not found` error, for instance.
 Software versioning is another common issue. A team might depend on a certain
 package version for their research project - if the software version was to
 change (for instance, if a package was updated), it might affect their results.
-Having access to multiple software versions allow a set of researchers to
+Having access to multiple software versions allows a set of researchers to
 prevent software versioning issues from affecting their results.
 
 Dependencies are where a particular software package (or even a particular
@@ -107,7 +107,7 @@ self-contained description of a software package -- it contains the
 settings required to run a software package and, usually, encodes required
 dependencies on other software packages.
 
-There are a number environment module implementations commonly
+There are a number of different environment module implementations commonly
 used on HPC systems: the two most common are _TCL modules_ and _Lmod_. Both of
 these use similar syntax and the concepts are the same so learning to use one
 will allow you to use whichever is installed on the system you are using. In
@@ -191,7 +191,6 @@ Now lets try loading the R environment module, and try again.
 
 {% include {{ site.snippets }}/modules/module-load-r.snip %}
 
-
 > ## Tab Completion
 >
 > The module command also supports tab completion. You may find this the easiest way to find the right software.
@@ -200,9 +199,7 @@ Now lets try loading the R environment module, and try again.
 So, what just happened?
 
 To understand the output, first we need to understand the nature of the `$PATH`
-environment variable.
-
-`$PATH` is a special environment variable that controls
+environment variable. `$PATH` is a special environment variable that controls
 where a UNIX system looks for software. Specifically `$PATH` is a list of
 directories (separated by `:`) that the OS searches through for a command
 before giving up and telling us it can't find it. As with all environment
