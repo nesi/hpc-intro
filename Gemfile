@@ -16,4 +16,3 @@ end
 gem "kramdown-parser-gfm"
 
 gem "mdl"
-gem "webrick"
