@@ -78,8 +78,8 @@ is a great way to contribute.
 :    *to be defined*
 
 [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell))
-:     (Bourne Again Shell), is the default shell for many Linux distrubutions.
-      It is the primary tool we use for batch proccessing.
+:     (Bourne Again Shell), is the default shell for many Linux distributions.
+      It is the primary tool we use for batch processing.
 
 [Shell](https://en.wikipedia.org/wiki/Shell_(computing))
 :     Computer program that exposes an operating system's services to a human user or other programs.

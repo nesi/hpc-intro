@@ -101,7 +101,7 @@ There is a lot of useful information contained within environment variable.
 > Can you think of some examples as to how these variables could be used in your script?
 
 > > ## Solution
-> > 
+> >
 > > * `SLURM_JOB_CPUS_PER_NODE` could be used to pass CPU numbers directly to any programs being used.
 > > * Some other things.
 > {: .solution}
@@ -109,12 +109,12 @@ There is a lot of useful information contained within environment variable.
 
 > ## Variables in Slurm Header
 >
-> Enviroment variables set by Slurm cannot be referenced in the Slurm header.
+> Environment variables set by Slurm cannot be referenced in the Slurm header.
 {: .callout}
 
 ## Default values
 
-It is good practice to set default values when using enviroment variables when there is a chance they will be run in an enviroment where they may not be present. 
+It is good practice to set default values when using environment variables when there is a chance they will be run in an environment where they may not be present. 
 
 ```
 FOO="${VARIABLE:-default}"
@@ -122,7 +122,6 @@ FOO="${VARIABLE:-default}"
 {: .language-bash}
 
 `FOO` will be to to the value of `VARIABLE` if is set, otherwise it will be set to `default`.
-
 
 As a slight variation on the above example. (`:=` as opposed to `:-`).
 
