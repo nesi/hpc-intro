@@ -17,9 +17,7 @@ keypoints:
 
 ## Methods of Parallel Computing
 
-The two main types of parallel computing we will discuss are _shared memory_ and _distributed memory_.
-
-To understand the difference we first need to clarify some terms.
+To understand the different types of Parallel Computing we first need to clarify some terms.
 
 {% include figure.html url="" max-width="40%"
    file="/fig/clusterDiagram.png"
@@ -37,12 +35,12 @@ To understand the difference we first need to clarify some terms.
 
 Which methods are available to you is largely dependent on the nature of the problem and software being used.
 
-Exercises in this episode will require a copy of the `whothis.sh` file from the workshop directory.
+<!-- Exercises in this episode will require a copy of the `whothis.sh` file from the workshop directory.
 
 ```
 {{ site.remote.prompt }}  cp ../whothis.sh .
 ```
-{: .language-bash}
+{: .language-bash} -->
 
 ### Shared-Memory (SMP)
 
@@ -61,8 +59,7 @@ Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 {% endcapture %}
 
 
-
-> ## Shared Memory Example
+> #### Shared Memory Example
 >
 > Create a new script called `example_smp.sl`
 >
@@ -74,15 +71,12 @@ Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --cpus-per-task   8
 > 
-> bash whothis.sh
-```
+> echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
+> ```
 > {: .language-bash}
 >
 > then submit with
 >
-{: .challenge}
-
-
 > ```
 > {{ site.remote.prompt }} sbatch example_smp.sl
 > ```
@@ -131,7 +125,7 @@ Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-t
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --ntasks          4
 > 
-> srun bash whothis.sh
+> srun echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
 > ```
 > {: .language-bash}
 > 
@@ -171,7 +165,7 @@ Using a combination of Shared and Distributed memory is called _Hybrid Parallel_
 > #SBATCH --ntasks          2
 > #SBATCH --cpus-per-task   4
 > 
-> srun bash whothis.sh
+> srun echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
 > ```
 > {: .language-bash}
 >
@@ -194,6 +188,80 @@ Using a combination of Shared and Distributed memory is called _Hybrid Parallel_
 > > {: .output}
 > {: .solution}
 {: .challenge}
+
+### GPGPU's
+
+GPUs compute large number of simple operation in parallel, making them well suited for Graphics Processing (hence the name), or any other large matrix operations.
+
+<!-- General-Purpose Graphics Processing Unit or GPGPU's are GPU's configured slightly differently. -->
+
+On NeSI, GPU's are specialised pieces of hardware that you request in addition to your CPUs and memory.
+
+You can find an up-to-date(ish) list of GPUs available on NeSI in our [Support Documentation](https://support.nesi.org.nz/hc/en-gb/articles/4963040656783-Available-GPUs-on-NeSI)
+
+GPUs can be requested using `-gpus-per-node=<gpu_type>:<gpu_number>`
+
+Depending on the GPU type, we *may* also need to specify a partition using `--partition`.
+
+> ## GPU Job Example
+>
+> Create a new script called `example_gpu.sl`
+>
+> ```
+> #!/bin/bash -e
+>
+> #SBATCH --job-name        gpu
+> #SBATCH --account         {{site.sched.projectcode}} 
+> #SBATCH --output          %x_%a.out
+> #SBATCH --mem-per-cpu     2G
+> #SBATCH --gpu-per-node    P100:1
+> 
+> module load CUDA
+> nvidia-smi  
+> ```
+> {: .language-bash}
+> 
+> then submit with
+> 
+> ```
+> {{ site.remote.prompt }} sbatch example_gpu.sl
+> ```
+> {: .language-bash}
+> 
+> > ## Solution
+> > 
+> > ```
+> > {{ site.remote.prompt }} cat gpu_job.out
+> >
+> > ```
+> > {: .language-bash}
+> >
+> > ```
+> > Tue Mar 12 19:40:51 2024       
+> > +-----------------------------------------------------------------------------+
+> > | NVIDIA-SMI 525.85.12    Driver Version: 525.85.12    CUDA Version: 12.0     |
+> > |-------------------------------+----------------------+----------------------+
+> > | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+> > | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+> > |                               |                      |               MIG M. |
+> > |===============================+======================+======================|
+> > |   0  Tesla P100-PCIE...  On   | 00000000:05:00.0 Off |                    0 |
+> > | N/A   28C    P0    24W / 250W |      0MiB / 12288MiB |      0%      Default |
+> > |                               |                      |                  N/A |
+> > +-------------------------------+----------------------+----------------------+
+> >                                                                                
+> > +-----------------------------------------------------------------------------+
+> > | Processes:                                                                  |
+> > |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+> > |        ID   ID                                                   Usage      |
+> > |=============================================================================|
+> > |  No running processes found                                                 |
+> > +-----------------------------------------------------------------------------+
+> > ```
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
 
 ### Job Array
 
@@ -221,7 +289,7 @@ If you are writing your own code, then this is something you will probably have 
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --array           0-3
 > 
-> bash whothis.sh
+> echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
 > ```
 > {: .language-bash}
 > 
@@ -286,7 +354,6 @@ However, unless that function is where the majority of time is spent, this is un
 
 
 *Python: [Multiproccessing](https://docs.python.org/3/library/multiprocessing.html)* (not to be confused with `threading` which is not really parallel.)
-
 
 *MATLAB: [Parpool](https://au.mathworks.com/help/parallel-computing/parpool.html)*
 
