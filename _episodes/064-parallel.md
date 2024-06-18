@@ -125,7 +125,7 @@ Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-t
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --ntasks          4
 > 
-> srun echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
+> srun bash -c 'echo I am task \#${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs'
 > ```
 > {: .language-bash}
 > 
