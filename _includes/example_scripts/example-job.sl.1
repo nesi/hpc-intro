@@ -5,6 +5,7 @@
 #SBATCH --mem           300M
 #SBATCH --time          00:15:00
 
+module purge
 module load {{ site.example.module }}
 {{ site.example.shell }} {{ site.example.script }} 
 echo "Done!"

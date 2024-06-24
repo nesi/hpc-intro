@@ -46,11 +46,11 @@ Which methods are available to you is largely dependent on the nature of the pro
 
 Shared-memory multiproccessing divides work among _CPUs_ or _threads_, all of these threads require access to the same memory.
 
-Often called `Multithreading`.
+Often called *Multithreading*.
 
 This means that all CPUs must be on the same node, most Mahuika nodes have 72 CPUs.
 
-Shared memory parallelism is what is used in our example script `{{ site.example.script }} `.
+Shared memory parallelism is what is used in our example script `{{ site.example.script }}`.
 
 Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 
@@ -58,8 +58,7 @@ Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 > {% include example_scripts/example_smp.sl %}
 {% endcapture %}
 
-
-> #### Shared Memory Example
+> ## Shared Memory Example
 >
 > Create a new script called `example_smp.sl`
 >
@@ -128,13 +127,14 @@ Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-t
 > srun echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
 > ```
 > {: .language-bash}
-> 
-> then submit with 
-> 
+>
+> then submit with
+>
 > ```
 > {{ site.remote.prompt }} sbatch example_mpi.sl
 > ```
 > {: .language-bash}
+>
 > > ## Solution
 > > 
 > > ```
@@ -155,7 +155,7 @@ Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-t
 Using a combination of Shared and Distributed memory is called _Hybrid Parallel_.
 
 > ## Hybrid Example
-> 
+>
 > ```
 > #!/bin/bash -e
 > 
@@ -180,7 +180,7 @@ Using a combination of Shared and Distributed memory is called _Hybrid Parallel_
 > > {{ site.remote.prompt }} cat hybrid_job.out
 > >
 > > ```
-> > 
+> >
 > > ```
 > > I am task #0 running on node 'wbn016' with 4 CPUs
 > > I am task #1 running on node 'wbn022' with 4 CPUs
@@ -199,7 +199,7 @@ On NeSI, GPU's are specialised pieces of hardware that you request in addition t
 
 You can find an up-to-date(ish) list of GPUs available on NeSI in our [Support Documentation](https://support.nesi.org.nz/hc/en-gb/articles/4963040656783-Available-GPUs-on-NeSI)
 
-GPUs can be requested using `-gpus-per-node=<gpu_type>:<gpu_number>`
+GPUs can be requested using `--gpus-per-node=<gpu_type>:<gpu_number>`
 
 Depending on the GPU type, we *may* also need to specify a partition using `--partition`.
 
