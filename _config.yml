@@ -78,9 +78,9 @@ example:
 
 episode_order:
   - 01-cluster
-  - 02-filedir
-  - 03-break1
+  - 02-filesystem
   - 04-modules
+  - 03-break1
   - 05-scheduler
   - 06-lunch
   - 064-parallel
