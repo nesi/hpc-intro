@@ -41,7 +41,7 @@ You will connect to a cluster over the internet either with a web client (Jupyte
 
 ## Nodes
 
-Individual computers that compose a cluster are typically called *nodes*
+Individual computers that compose a cluster are typically called *nodes*.
 On a cluster, there are different types of nodes for different
 types of tasks. The node where you are now will be different depending on
 how you accessed the cluster.
@@ -84,7 +84,7 @@ It is common for nodes to connect to a shared, remote disk.
 >
 > If you want to transfer larger amounts of data to or from the cluster, NeSI
 > offers dedicated transfer nodes using the Globus service.  More information on using Globus for large data transfer to and from 
-> the cluster can be found here: [Globus Transfer Service](https://support.nesi.org.nz/hc/en-gb/sections/360000040596)
+> the cluster can be found here: [Globus Transfer Service](https://docs.nesi.org.nz/Storage/Data_Transfer_Services/Globus_Quick_Start_Guide/)
 {: .callout}
 
 {% include links.md %}
