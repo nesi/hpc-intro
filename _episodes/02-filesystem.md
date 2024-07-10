@@ -1,15 +1,15 @@
 ---
 title: "NeSI Filesystem"
-teaching: 30
-exercises: 10
+teaching: 15
+exercises: 5
 questions:
-- "How can I move around the cluster filesystem"
-- "How can I see what files and directories I have?"
-- "How can I make new files and directories."
+- "Where is the best place to store my data?"
+- "How do I recover deleted files?"
+- "How do I find out how much disk space I have?"
 objectives:
-- "Create, edit, manipulate and remove files from command line"
+- "Learn about the NeSI filesystems, and when to use each one."
 keypoints:
-- "The file system is responsible for managing information on the disk."
+- ""
 
 ---
 
