@@ -123,7 +123,7 @@ working_dir:
 
 # Start time in minutes (0 to be clock-independent, 540 to show a start at 09:00 am).
 # 600 is 10am
-start_time: 600
+start_time: 540
 # Start time for people wanting to skip bash content
 hpc_start_time: 780
 # Lesson to start at.
