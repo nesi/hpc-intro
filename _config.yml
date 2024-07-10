@@ -82,10 +82,9 @@ episode_order:
   - 04-modules
   - 03-break1
   - 05-scheduler
-  - 06-lunch
   - 064-parallel
-  - 07-resources
   - 08-break2
+  - 07-resources
   - 09-scaling
 
 
