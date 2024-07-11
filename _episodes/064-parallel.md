@@ -54,18 +54,15 @@ Shared memory parallelism is what is used in our example script `{{ site.example
 
 Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 
-{% capture example_smp %}
-> {% include example_scripts/example_smp.sl %}
-{% endcapture %}
-
 > ## Shared Memory Example
 >
-> Create a new script called `example_smp.sl`
+> Create a new script called `smp-job.sl`
 >
 > ```
 > #!/bin/bash -e
 > 
-> #SBATCH --job-name        smp_job
+> #SBATCH --job-name        smp-job
+> #SBATCH --account         {{site.sched.projectcode}}
 > #SBATCH --output          %x.out
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --cpus-per-task   8
@@ -77,7 +74,7 @@ Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 > then submit with
 >
 > ```
-> {{ site.remote.prompt }} sbatch example_smp.sl
+> {{ site.remote.prompt }} sbatch smp-job.sl
 > ```
 > {: .language-bash}
 >
@@ -86,7 +83,7 @@ Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 > > Checking the output should reveal
 > >
 > > ```
-> > {{ site.remote.prompt }} cat smp_job.out
+> > {{ site.remote.prompt }} cat smp-job.out
 > > ```
 > > {: .language-bash}
 > >
@@ -114,12 +111,13 @@ Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-t
 
 > ## Distributed Memory Example
 >
-> Create a new script called `example_mpi.sl`
+> Create a new script called `mpi-job.sl`
 >
 > ```
 > #!/bin/bash -e
 >
-> #SBATCH --job-name            mpi_job
+> #SBATCH --job-name        mpi-job
+> #SBATCH --account         {{site.sched.projectcode}} 
 > #SBATCH --output          %x.out
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --ntasks          4
@@ -131,14 +129,14 @@ Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-t
 > then submit with
 >
 > ```
-> {{ site.remote.prompt }} sbatch example_mpi.sl
+> {{ site.remote.prompt }} sbatch mpi-job.sl
 > ```
 > {: .language-bash}
 >
 > > ## Solution
 > > 
 > > ```
-> > {{ site.remote.prompt }} cat mpi_job.out
+> > {{ site.remote.prompt }} cat mpi-job.out
 > > ```
 > > {: .language-bash}
 > >
@@ -156,10 +154,13 @@ Using a combination of Shared and Distributed memory is called _Hybrid Parallel_
 
 > ## Hybrid Example
 >
+> Create a new script called `hybrid-job.sl`
+>
 > ```
 > #!/bin/bash -e
 > 
-> #SBATCH --job-name        hybrid_job
+> #SBATCH --job-name        hybrid-job
+> #SBATCH --account         {{site.sched.projectcode}} 
 > #SBATCH --output          %x.out
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --ntasks          2
@@ -170,14 +171,14 @@ Using a combination of Shared and Distributed memory is called _Hybrid Parallel_
 > {: .language-bash}
 >
 > ```
-> {{ site.remote.prompt }} sbatch example_hybrid.sl
+> {{ site.remote.prompt }} sbatch hybrid-job.sl
 > ```
 > {: .language-bash}
 > 
 > > ## Solution
 > > 
 > > ```
-> > {{ site.remote.prompt }} cat hybrid_job.out
+> > {{ site.remote.prompt }} cat hybrid-job.out
 > >
 > > ```
 > >
@@ -205,14 +206,14 @@ Depending on the GPU type, we *may* also need to specify a partition using `--pa
 
 > ## GPU Job Example
 >
-> Create a new script called `example_gpu.sl`
+> Create a new script called `gpu-job.sl`
 >
 > ```
 > #!/bin/bash -e
 >
-> #SBATCH --job-name        gpu
+> #SBATCH --job-name        gpu-job
 > #SBATCH --account         {{site.sched.projectcode}} 
-> #SBATCH --output          %x_%a.out
+> #SBATCH --output          %x.out
 > #SBATCH --mem-per-cpu     2G
 > #SBATCH --gpu-per-node    P100:1
 > 
@@ -224,14 +225,14 @@ Depending on the GPU type, we *may* also need to specify a partition using `--pa
 > then submit with
 > 
 > ```
-> {{ site.remote.prompt }} sbatch example_gpu.sl
+> {{ site.remote.prompt }} sbatch gpu-job.sl
 > ```
 > {: .language-bash}
 > 
 > > ## Solution
 > > 
 > > ```
-> > {{ site.remote.prompt }} cat gpu_job.out
+> > {{ site.remote.prompt }} cat gpu-job.out
 > >
 > > ```
 > > {: .language-bash}
@@ -262,7 +263,6 @@ Depending on the GPU type, we *may* also need to specify a partition using `--pa
 > {: .solution}
 {: .challenge}
 
-
 ### Job Array
 
 Job arrays are not "multiproccessing" in the same way as the previous two methods.
@@ -279,12 +279,12 @@ If you are writing your own code, then this is something you will probably have 
 
 > ## Job Array Example
 > 
-> Create a new script called `example_jobarray.sl`
+> Create a new script called `array-job.sl`
 >
 > ```
 > #!/bin/bash -e
 >
-> #SBATCH --job-name        job_array
+> #SBATCH --job-name        array-job
 > #SBATCH --output          %x_%a.out
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --array           0-3
@@ -296,7 +296,7 @@ If you are writing your own code, then this is something you will probably have 
 > then submit with
 > 
 > ```
-> {{ site.remote.prompt }} sbatch example_jobarray.sl
+> {{ site.remote.prompt }} sbatch array-job.sl
 > ```
 > {: .language-bash}
 > 
@@ -308,7 +308,7 @@ If you are writing your own code, then this is something you will probably have 
 > > {: .language-bash}
 > >
 > > ```
-> > job_array_0.out job_array_1.out job_array_2.out job_array_3.out
+> > array-job_0.out array-job_1.out array-job_2.out array-job_3.out
 > > ```
 > > {: .output}
 > > 
@@ -316,7 +316,7 @@ If you are writing your own code, then this is something you will probably have 
 > > 
 > > 
 > > ```
-> >  {{ site.remote.prompt }} cat job_array_*.out
+> >  {{ site.remote.prompt }} cat array-job*.out
 > > ```
 > > {: .language-bash}
 > >
@@ -351,7 +351,6 @@ It is important to determine this before you start requesting more resources thr
 
 If you are writing your own code, some programming languages will have functions that can make use of multiple CPUs without requiring you to changes your code.
 However, unless that function is where the majority of time is spent, this is unlikely to give you the performance you are looking for.
-
 
 *Python: [Multiproccessing](https://docs.python.org/3/library/multiprocessing.html)* (not to be confused with `threading` which is not really parallel.)
 
