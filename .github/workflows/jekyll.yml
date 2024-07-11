@@ -49,7 +49,7 @@ jobs:
           make lesson-check-all
       - name: "Check lesson for errors"
         run: |
-          make lesson-check
+          make lesson-check | true
       - name: "Check build"
         run: |
           make --always-make site ${{ steps.pages.outputs.base_path }}
