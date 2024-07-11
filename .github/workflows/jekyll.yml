@@ -52,7 +52,7 @@ jobs:
       #     make lesson-check | true
       - name: "Check build"
         run: |
-          make --always-make site ${{ steps.pages.outputs.base_path }}
+          make --always-make site  # ${{ steps.pages.outputs.base_path }}
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
