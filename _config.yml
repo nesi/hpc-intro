@@ -18,6 +18,7 @@
 # `snippets` variable below!
 
 snippets: "/snippets_library/NeSI_Mahuika_slurm"
+github: [metadata]
 
 local:
   prompt: "[you@laptop:~]$"
