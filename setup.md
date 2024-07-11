@@ -41,7 +41,7 @@ In a web browser, navigate to [https://jupyter.nesi.org.nz](https://jupyter.nesi
 ### SSH and SBATCH
 
 ![Terminal](/fig/UsingJupyterHub1.svg)
-From your local computer, using an SSH client to connect to a shell session (interactive), running on the NeSI login Node. Jobs scripts are submitted using the `sbatch` command (non-interactive).  Instructions for SSH and command-line setup can be found in our documentation: [Accessing the HPCs](https://support.nesi.org.nz/hc/en-gb/sections/360000034315)
+From your local computer, using an SSH client to connect to a shell session (interactive), running on the NeSI login Node. Jobs scripts are submitted using the `sbatch` command (non-interactive).  Instructions for SSH and command-line setup can be found in our documentation: [Accessing the HPCs](https://docs.nesi.org.nz/Getting_Started/Accessing_the_HPCs/Setting_Up_and_Resetting_Your_Password/)
 
 **Best For:** Users familiar with command line, Linux/Mac users.  
 

@@ -217,8 +217,8 @@ SMT is why you are provided 2 CPUs instead of 1 as we do not allow
 2 different jobs to share a core.  This also explains why you will sometimes
 see CPU efficiency above 100%, since CPU efficiency is based on core and not thread.
 
-For more details please see our documentation:
-<https://support.nesi.org.nz/hc/en-gb/articles/360000568236-Hyperthreading>
+For more details please see our [documentation on Hyperthreading
+](https://docs.nesi.org.nz/Scientific_Computing/Running_Jobs_on_Maui_and_Mahuika/Hyperthreading/)
 
 ## Measuring the System Load From Currently Running Tasks
 

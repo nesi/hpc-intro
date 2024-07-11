@@ -99,7 +99,7 @@ You will get the output printed to your terminal as if you had just run those co
 >
 > You can kill a currently running task by pressing the keys <kbd>ctrl</kbd> + <kbd>c</kbd>.
 > If you just want your terminal back, but want the task to continue running you can 'background' it by pressing <kbd>ctrl</kbd> + <kbd>v</kbd>.
-> Note, a backgrounded task is still attached to your terminal session, and will be killed when you close the terminal (if you need to keep running a task after you log out, have a look at [tmux](https://support.nesi.org.nz/hc/en-gb/articles/4563511601679-tmux-Reference-sheet)).
+> Note, a backgrounded task is still attached to your terminal session, and will be killed when you close the terminal (if you need to keep running a task after you log out, have a look at [tmux](https://docs.nesi.org.nz/Getting_Started/Cheat_Sheets/tmux-Reference_sheet/)).
 {: .callout}
 
 ## Scheduled Batch Job

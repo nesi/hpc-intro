@@ -197,7 +197,7 @@ GPUs compute large number of simple operation in parallel, making them well suit
 
 On NeSI, GPU's are specialised pieces of hardware that you request in addition to your CPUs and memory.
 
-You can find an up-to-date(ish) list of GPUs available on NeSI in our [Support Documentation](https://support.nesi.org.nz/hc/en-gb/articles/4963040656783-Available-GPUs-on-NeSI)
+You can find an up-to-date(ish) list of GPUs available on NeSI in our [Support Documentation](https://docs.nesi.org.nz/Scientific_Computing/The_NeSI_High_Performance_Computers/Available_GPUs_on_NeSI/)
 
 GPUs can be requested using `--gpus-per-node=<gpu_type>:<gpu_number>`
 
