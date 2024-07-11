@@ -166,7 +166,7 @@ Using a combination of Shared and Distributed memory is called _Hybrid Parallel_
 > #SBATCH --ntasks          2
 > #SBATCH --cpus-per-task   4
 > 
-> srun echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
+> srun bash -c 'echo I am task \#${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs'
 > ```
 > {: .language-bash}
 >
