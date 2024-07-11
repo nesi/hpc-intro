@@ -285,6 +285,7 @@ If you are writing your own code, then this is something you will probably have 
 > #!/bin/bash -e
 >
 > #SBATCH --job-name        array-job
+> #SBATCH --account         nesi99991
 > #SBATCH --output          %x_%a.out
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --array           0-3
