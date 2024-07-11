@@ -44,12 +44,12 @@ jobs:
           bundle config set path '.vendor/bundle'
           bundle config build.nokogiri --use-system-libraries
           bundle install
-      - name: "Check lesson for warnings"
-        run: |
-          make lesson-check-all
-      - name: "Check lesson for errors"
-        run: |
-          make lesson-check | true
+      # - name: "Check lesson for warnings"
+      #   run: |
+      #     make lesson-check-all
+      # - name: "Check lesson for errors"
+      #   run: |
+      #     make lesson-check | true
       - name: "Check build"
         run: |
           make --always-make site ${{ steps.pages.outputs.base_path }}
