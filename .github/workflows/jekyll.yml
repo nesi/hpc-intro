@@ -28,23 +28,31 @@ concurrency:
 
 jobs:
   # Build job
-  build:
+  check_lesson_and_build_default:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@8575951200e472d5f2d95c625da0c7bec8217c42 # v1.161.0
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0.4'
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-          cache-version: 0 # Increment this number if you need to re-download cached gems
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-      - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
-        run: HPC_JEKYLL_CONFIG=_includes/snippets_library/NeSI_Mahuika_slurm/_config_options.yml make serve ${{ steps.pages.outputs.base_path }}
+          bundler-cache: true
+      - name: Install basic requirements
+        run: |
+          # Need this library for nokogiri
+          sudo apt-get install libxslt1-dev
+          gem install bundler json kramdown kramdown-parser-gfm
+          bundle config set path '.vendor/bundle'
+          bundle config build.nokogiri --use-system-libraries
+          bundle install
+      - name: "Check lesson for warnings"
+        run: |
+          make lesson-check-all
+      - name: "Check lesson for errors"
+        run: |
+          make lesson-check
+      - name: "Check build"
+        run: |
+          make --always-make site ${{ steps.pages.outputs.base_path }}
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
@@ -57,7 +65,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: check_lesson_and_build_default
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
