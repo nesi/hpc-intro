@@ -75,7 +75,7 @@ please see our [Filesystem and Quota](https://docs.nesi.org.nz/Storage/File_Syst
 
 ### Working Directory
 
-We will be working from the directory `{ site.working_dir[-1] }}`.
+We will be working from the directory `{{ site.working_dir[-1] }}`.
 
 ```
 {{ site.remote.prompt }} cd {{ site.working_dir | join: '/' }}
