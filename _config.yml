@@ -79,9 +79,9 @@ example:
 
 episode_order:
   - 01-cluster
-  - 02-filesystem
-  - 04-modules
+  - 02-unix-shell
   - 03-break1
+  - 04-modules
   - 05-scheduler
   - 064-parallel
   - 08-break2
