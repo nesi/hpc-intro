@@ -79,13 +79,6 @@ Next is `home`, as it is the next part of the path we know it is inside the root
 we also know that home is another directory as the path continues.
 Finally, stored inside `home` is the directory with your username.
 
-#### Version Control
-
-Version control systems (such as Git) often have free, cloud-based offerings
-(e.g., BitBucket, GitHub and GitLab) that are generally used for storing source code. Even
-if you are not writing your own programs, these can be very useful for storing
-job submit scripts, notes and other files.  Git is not an appropriate solution for storing data.
-
 > ## Slashes
 >
 > Notice that there are two meanings for the `/` character.
