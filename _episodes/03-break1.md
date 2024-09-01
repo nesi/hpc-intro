@@ -1,5 +1,5 @@
 ---
 title: "Morning Break"
 layout: break
-break: 10
+break: 60
 ---

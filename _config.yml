@@ -79,9 +79,9 @@ example:
 
 episode_order:
   - 01-cluster
-  - 02-filesystem
-  - 04-modules
+  - 02-unix-shell
   - 03-break1
+  - 04-modules
   - 05-scheduler
   - 064-parallel
   - 08-break2
@@ -118,12 +118,13 @@ kind: "lesson"
 
 # Workshop working directory.
 working_dir:
-  - /nesi/project/nesi99991
-  - resbaz24
+  - /nesi/nobackup/nesi99991
+  - ASP_winterschool2023
+  - workspace
 
 # Start time in minutes (0 to be clock-independent, 540 to show a start at 09:00 am).
 # 600 is 10am
-start_time: 540
+start_time: 660
 # Start time for people wanting to skip bash content
 hpc_start_time: 780
 # Lesson to start at.
