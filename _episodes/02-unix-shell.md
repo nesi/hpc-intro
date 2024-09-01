@@ -187,6 +187,62 @@ We can check we are in the right place by running `pwd`.
 
 {: .output}
 
+> ## Tab completion
+>
+> Sometimes file paths and file names can be very long, making typing out the path tedious.
+> One trick you can use to save yourself time is to use something called **tab completion**.
+> If you start typing the path in a command and their is only one possible match,
+> if you hit tab the path will autocomplete (until there are more than one possible matches).
+>
+> > ## Solution
+> >
+> >For example, if you type:
+> >
+> > ```
+> > {{ site.remote.prompt }} cd {{ site.working_dir | last | slice: 0,3 }}
+> > ```
+> >
+> > {: .language-bash}
+> >
+> > and then press <kbd>Tab</kbd> (the tab key on your keyboard),
+> > the shell automatically completes the directory name for you (since there is only one possible match):
+> >
+> > ```
+> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/
+> > ```
+> >
+> > {: .language-bash}
+> >
+> > However, you want to move to your personal working directory. If you hit <kbd>Tab</kbd> once you will
+> > likely see nothing change, as there are more than one possible options. Hitting <kbd>Tab</kbd>
+> > a second time will print all possible autocomplete options.
+> >
+> > ```
+> > cwal219/    riom/    harrellw/
+> > ```
+> >
+> > {: .output}
+> >
+> >Now entering in the first few characters of the path (just enough that the possible options are no longer ambiguous) and pressing <kbd>Tab</kbd> again, should complete the path.
+> >
+> > Now press <kbd>Enter</kbd> to execute the command.
+> >
+> > ```
+> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/<username>
+> > ```
+> >
+> > {: .language-bash}
+> >
+> > Check that we've moved to the right place by running `pwd`.
+> >
+> > ```
+> > {{ site.working_dir | join: '/' }}/<username>
+> > ```
+> >
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
 ## Creating directories
 
 <!-- NOTE: This bit uses relative paths even though the convept hasn't been introduced yet. -->
@@ -489,62 +545,6 @@ directories "backup" and "thing"; "/Users/backup" contains "original",
 {: .challenge}
 
 include in terminal excersise (delete slurm files later on maybe?)
-
-> ## Tab completion
->
-> Sometimes file paths and file names can be very long, making typing out the path tedious.
-> One trick you can use to save yourself time is to use something called **tab completion**.
-> If you start typing the path in a command and their is only one possible match,
-> if you hit tab the path will autocomplete (until there are more than one possible matches).
->
-> > ## Solution
-> >
-> >For example, if you type:
-> >
-> > ```
-> > {{ site.remote.prompt }} cd {{ site.working_dir | last | slice: 0,3 }}
-> > ```
-> >
-> > {: .language-bash}
-> >
-> > and then press <kbd>Tab</kbd> (the tab key on your keyboard),
-> > the shell automatically completes the directory name for you (since there is only one possible match):
-> >
-> > ```
-> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/
-> > ```
-> >
-> > {: .language-bash}
-> >
-> > However, you want to move to your personal working directory. If you hit <kbd>Tab</kbd> once you will
-> > likely see nothing change, as there are more than one possible options. Hitting <kbd>Tab</kbd>
-> > a second time will print all possible autocomplete options.
-> >
-> > ```
-> > cwal219/    riom/    harrellw/
-> > ```
-> >
-> > {: .output}
-> >
-> >Now entering in the first few characters of the path (just enough that the possible options are no longer ambiguous) and pressing <kbd>Tab</kbd> again, should complete the path.
-> >
-> > Now press <kbd>Enter</kbd> to execute the command.
-> >
-> > ```
-> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/<username>
-> > ```
-> >
-> > {: .language-bash}
-> >
-> > Check that we've moved to the right place by running `pwd`.
-> >
-> > ```
-> > {{ site.working_dir | join: '/' }}/<username>
-> > ```
-> >
-> > {: .output}
-> {: .solution}
-{: .challenge}
 
 ## Create a text file
 
