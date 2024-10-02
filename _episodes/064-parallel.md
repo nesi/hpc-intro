@@ -67,7 +67,12 @@ Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 > #SBATCH --mem-per-cpu     500
 > #SBATCH --cpus-per-task   8
 > 
-> echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
+> echo -ne "Slurm Task ID:\t"
+> echo ${SLURM_PROCID}
+> echo -ne "On Node: \t"
+> echo $(hostname)
+> echo -n "Number of CPUs: "
+> echo $(nproc)
 > ```
 > {: .language-bash}
 >
