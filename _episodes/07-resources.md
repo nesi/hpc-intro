@@ -12,6 +12,7 @@ objectives:
 keypoints:
 - "As your task gets larger, so does the potential for inefficiencies."
 - "The smaller your job (time, CPUs, memory, etc), the faster it will schedule."
+math: True
 ---
 <!--
 - scaling testing involves running jobs with increasing resources and measuring the efficiency in order to establish a pattern informed decisions about future job submissions.-->
@@ -118,31 +119,31 @@ If we check the status of our finished job using the `sacct` command we learned 
 
 With this information, we may determine a couple of things.
 
-Memory efficiency can be determined by comparing <strong style="color:#66cdaa">ReqMem</strong> (requested memory) with <strong style="color:#00e400">MaxRSS</strong> (maximum used memory), MaxRSS is  given in KB, so a unit conversion is usually required.
+Memory efficiency can be determined by comparing <strong>ReqMem</strong> (requested memory) with <strong>MaxRSS</strong> (maximum used memory), MaxRSS is  given in KB, so a unit conversion is usually required.
 
-{% include figure.html url="" max-width="75%" caption=""
-   file="/fig/mem_eff.svg"
-   alt="Memory Efficiency Formula" %}
+<!-- {% include figure.html url="" max-width="75%" caption=""   file="/fig/mem_eff.svg"   alt="Memory Efficiency Formula" %} -->
 
-So for the above example we see that <strong style="color:#00e400">0.1GB</strong> (102048K) of our requested <strong style="color:#66cdaa">1GB</strong> meaning the memory efficincy was about <strong>10%</strong>.
+$$ {Efficiency_{mem} = { MaxRSS \over ReqMem}} $$
 
-CPU efficiency can be determined by comparing <strong style="color:#ff8c00">TotalCPU</strong>(CPU time), with the maximum possible CPU time. The maximum possible CPU time equal to <strong style="color:#ff1493">Alloc</strong> (number of allocated CPUs) multiplied by <strong style="color:#0000ff">Elapsed</strong> (Walltime, actual time passed).
+So for the above example we see that <strong>0.1GB</strong> (102048K) of our requested <strong>1GB</strong> meaning the memory efficincy was about <strong>10%</strong>.
 
-{% include figure.html url="" max-width="75%" caption=""
-   file="/fig/cpu_eff.svg"
-   alt="CPU Efficiency Formula" %}
+CPU efficiency can be determined by comparing <strong>TotalCPU</strong>(CPU time), with the maximum possible CPU time. The maximum possible CPU time equal to <strong>Alloc</strong> (number of allocated CPUs) multiplied by <strong>Elapsed</strong> (Walltime, actual time passed).
 
-For the above example <strong style="color:#ff8c00">33 seconds</strong> of computation was done,
+<!-- {% include figure.html url="" max-width="75%" caption=""   file="/fig/cpu_eff.svg"   alt="CPU Efficiency Formula" %} -->
 
-where the maximum possible computation time was **96 seconds** (<strong style="color:#ff1493">2 CPUs</strong> multiplied by <strong style="color:#0000ff">48 seconds</strong>), meaning the CPU efficiency was about <strong>35%</strong>.
+$$ {Efficiency_{cpu} = { TotalCPU \over {Elapsed \times Alloc}}} $$
 
-Time Efficiency is simply the <strong style="color:#0000ff">Elapsed Time</strong> divided by <strong style="color:#1ebfff">Time Requested</strong>.
+For the above example <strong>33 seconds</strong> of computation was done,
 
-{% include figure.html url="" max-width="75%" caption=""
-   file="/fig/time_eff.svg"
-   alt="Time Efficiency Formula" %}
+where the maximum possible computation time was **96 seconds** (<strong>2 CPUs</strong> multiplied by <strong>48 seconds</strong>), meaning the CPU efficiency was about <strong>35%</strong>.
 
-<strong style="color:#0000ff">48 seconcds</strong> out of <strong style="color:#1ebfff">15 minutes</strong> requested give a time efficiency of about <strong>5%</strong>
+Time Efficiency is simply the <strong>Elapsed Time</strong> divided by <strong>Time Requested</strong>.
+
+$$ {Efficiency_{time} = { Elapsed \over Requested}} $$
+
+<!-- {% include figure.html url="" max-width="75%" caption=""  file="/fig/time_eff.svg"  alt="Time Efficiency Formula" %}-->
+
+<strong>48 seconcds</strong> out of <strong>15 minutes</strong> requested give a time efficiency of about <strong>5%</strong>
 
 > ## Efficiency Exercise
 >
