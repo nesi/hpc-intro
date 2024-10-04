@@ -67,7 +67,7 @@ sched:
 example:
   lang: "R"
   shell: "Rscript "
-  script: "array_sum.r"
+  script: "sum_matrix.r"
   module: "R/4.3.1-gimkl-2022a"
 
 # For 'python'
