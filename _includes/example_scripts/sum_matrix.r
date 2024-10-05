@@ -1,15 +1,16 @@
 #!/usr/bin/env Rscript
 
-suppressPackageStartupMessages(library(doParallel))
 
 # Function for shared memory execution
 doTask <- function(size_x, size_y, seed, print_progress){
+    suppressPackageStartupMessages(library(doParallel))
+
     message(sprintf("Summing [ %e x %e ] matrix, seed = '%i'",size_x,size_y, seed))
     message(sprintf("Running on '%s' with %i CPU(s).", Sys.info()["nodename"], num_cpus))
 
     set.seed(seed)
 
-    registerDoParallel(num_cpus)
+    registerDoParallel((num_cpus/2))
 
     results_all <- foreach(z=0:size_x) %dopar% {
         percent_complete= z*100/size_x
@@ -25,7 +26,7 @@ doTask <- function(size_x, size_y, seed, print_progress){
 
 ntasks <- strtoi(Sys.getenv('SLURM_NTASKS', unset = "1")) 
 seed <- strtoi(Sys.getenv('SLURM_ARRAY_TASK_ID', unset = "0"))
-num_cpus <- strtoi(Sys.getenv('SLURM_CPUS_PER_TASK', unset = "1"))
+num_cpus <- as.integer(strtoi(Sys.getenv('SLURM_CPUS_PER_TASK', unset = "1")))
 
 size_x <-60000 # This on makes memorier
 size_y <-40000 # This one to make longer
@@ -39,7 +40,7 @@ print_progress <- TRUE
 #If more than 1 task, use doMPI 
 if (ntasks > 1){
     suppressPackageStartupMessages(library(doSNOW))
-     cl <- makeSOCKcluster(outfile="", 2)
+     cl <- makeMPIcluster(outfile="")
 
     results_all <- foreach(z=1:ntasks) %dopar% {
         doTask(size_x, ceiling(size_y/ntasks), z+seed, print_progress)
