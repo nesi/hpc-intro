@@ -76,7 +76,7 @@ GPUs can be requested using `--gpus-per-node=<gpu_type>:<gpu_number>`
 
 Depending on the GPU type, we *may* also need to specify a partition using `--partition`.
 
-<!-- > ## GPU Job Example
+## GPU Job Example
 >
 > Create a new script called `gpu-job.sl`
 >
@@ -133,7 +133,7 @@ Depending on the GPU type, we *may* also need to specify a partition using `--pa
 > > ```
 > > {: .output}
 > {: .solution}
-{: .challenge} -->
+{: .challenge}
 
 ### Job Array
 
