@@ -6,4 +6,7 @@
 #SBATCH --mem-per-cpu     500
 #SBATCH --array           0-3
 
-srun echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
+module purge
+module load R/4.3.1-gimkl-2022a
+Rscript sum_matrix.r
+echo "Done!"

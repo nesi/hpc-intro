@@ -1,4 +1,4 @@
----
+![NeSI-HPC-Facility](https://github.com/user-attachments/assets/e9e6eda6-b1c7-4f55-84c0-965b9ac3ccd7)---
 title: "Working on a remote HPC system"
 # teaching: 10
 teaching: 20
@@ -34,6 +34,8 @@ that are provisioned to users on demand or as needed.
 *HPC*, *High Performance Computer*, *High Performance Computing* or *Supercomputer* are all general terms for a large or powerful computing resource.
 
 *Cluster* is a more specific term describing a type of supercomputer comprised of multiple smaller computers (nodes) working together. Almost all supercomputers are clusters.
+
+![NeSI-HPC-Facility](https://github.com/user-attachments/assets/fb2ca699-9c94-440c-a2e3-eeb2086eed31)
 
 ## Access
 

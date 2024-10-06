@@ -45,6 +45,67 @@ which hold files or other directories.
 
 Understanding how to navigate the file system using command line is essential for using an HPC.
 
+The NeSI filesystem looks something like this:
+
+![The file system is made up of a root directory that contains sub-directories
+titled home, nesi, and system files](../fig/NesiFiletree.svg)
+
+The directories that are relevant to us are.
+
+<table style="width: 100%; height: 90px;">
+<tbody>
+<tr>
+<td style="width: 300px;"></td>
+<td style="width: 250px;">Location</td>
+<td style="width: 167.562px;">Default Storage</td>
+<td style="width: 142.734px;">Default Files</td>
+<td style="width: 89.3594px;">Backup</td>
+<td style="width: 155.188px;">Access Speed</td>
+</tr>
+<tr>
+<td style="width: 300px;"><strong>Home</strong> is for user-specific files such as configuration files, environment setup, source code, etc.</td>
+<td style="width: 250px;"><code>/home/&lt;username&gt;</code></td>
+<td style="width: 167.562px;">20GB</td>
+<td style="width: 142.734px;">1,000,000</td>
+<td style="width: 89.3594px;">Daily</td>
+<td style="width: 155.188px;">Normal</td>
+</tr>
+<tr>
+<td style="width: 300px;"><strong>Project</strong> is for persistent project-related data, project-related software, etc.</td>
+<td style="width: 250px;"><code>/nesi/project/&lt;projectcode&gt;</code></td>
+<td style="width: 167.562px;">100GB</td>
+<td style="width: 142.734px;">100,000</td>
+<td style="width: 89.3594px;">Daily</td>
+<td style="width: 155.188px;">Normal</td>
+</tr>
+<tr>
+<td style="width: 300px;"><strong>Nobackup</strong> is a 'scratch space', for data you don't need to keep long term. Old data is periodically deleted from nobackup</td>
+<td style="width: 250px;"><code>/nesi/nobackup/&lt;projectcode&gt;</code></td>
+<td style="width: 167.562px;">10TB</td>
+<td style="width: 142.734px;">1,000,000</td>
+<td style="width: 89.3594px;">None</td>
+<td style="width: 155.188px;">Fast</td>
+</tr>
+</tbody>
+</table>
+
+### Managing your data and storage (backups and quotas)
+
+NeSI performs backups of the `/home` and `/nesi/project` (persistent) filesystems.  However, backups are only captured once per day.  So, if you edit or change code or data and then immediately delete it, it likely cannot be recovered.  Note, as the name suggests, NeSI does **not** backup the `/nesi/nobackup` filesystem.
+
+Protecting critical data from corruption or deletion is primarily your
+responsibility. Ensure you have a data management plan and stick to the plan to reduce the chance of data loss.  Also important is managing your storage quota.  To check your quotas, use the `nn_storage_quota` command, eg
+
+{% include {{ site.snippets }}/filedir/sinfo.snip %}
+
+As well as disk space, 'inodes' are also tracked, this is the *number* of files.
+
+Notice that the project space for this user is over quota and has been locked, meaning no more data can be added.  When your space is locked you will need to move or remove data.  Also note that none of the nobackup space is being used.  Likely data from project can be moved to nobackup. `nn_storage_quota` uses cached data, and so will no immediately show changes to storage use.
+
+For more details on our persistent and nobackup storage systems, including data retention and the nobackup autodelete schedule,
+please see our [Filesystem and Quota](https://docs.nesi.org.nz/Storage/File_Systems_and_Quotas/NeSI_File_Systems_and_Quotas/) documentation.
+
+
 Directories are like *places* — at any time
 while we are using the shell, we are in exactly one place called
 our **current working directory**.
@@ -187,62 +248,6 @@ We can check we are in the right place by running `pwd`.
 
 {: .output}
 
-> ## Tab completion
->
-> Sometimes file paths and file names can be very long, making typing out the path tedious.
-> One trick you can use to save yourself time is to use something called **tab completion**.
-> If you start typing the path in a command and their is only one possible match,
-> if you hit tab the path will autocomplete (until there are more than one possible matches).
->
-> > ## Solution
-> >
-> >For example, if you type:
-> >
-> > ```
-> > {{ site.remote.prompt }} cd {{ site.working_dir | last | slice: 0,3 }}
-> > ```
-> >
-> > {: .language-bash}
-> >
-> > and then press <kbd>Tab</kbd> (the tab key on your keyboard),
-> > the shell automatically completes the directory name for you (since there is only one possible match):
-> >
-> > ```
-> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/
-> > ```
-> >
-> > {: .language-bash}
-> >
-> > However, you want to move to your personal working directory. If you hit <kbd>Tab</kbd> once you will
-> > likely see nothing change, as there are more than one possible options. Hitting <kbd>Tab</kbd>
-> > a second time will print all possible autocomplete options.
-> >
-> > ```
-> > cwal219/    riom/    harrellw/
-> > ```
-> >
-> > {: .output}
-> >
-> >Now entering in the first few characters of the path (just enough that the possible options are no longer ambiguous) and pressing <kbd>Tab</kbd> again, should complete the path.
-> >
-> > Now press <kbd>Enter</kbd> to execute the command.
-> >
-> > ```
-> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/<username>
-> > ```
-> >
-> > {: .language-bash}
-> >
-> > Check that we've moved to the right place by running `pwd`.
-> >
-> > ```
-> > {{ site.working_dir | join: '/' }}/<username>
-> > ```
-> >
-> > {: .output}
-> {: .solution}
-{: .challenge}
-
 ## Creating directories
 
 <!-- NOTE: This bit uses relative paths even though the convept hasn't been introduced yet. -->
@@ -339,7 +344,7 @@ These two specific hidden directories are special as they will exist hidden insi
 
 You may have noticed in the last command we did not specify an argument for the directory path.
 Until now, when specifying directory names, or even a directory path (as above),
-we have been using what are know **absolute paths**, which work no matter where you are currently located on the machine
+we have been using what are known as **absolute paths**, which work no matter where you are currently located on the machine
 since it specifies the full path from the top level root directory.
 
 An **absolute path** always starts at the root directory, which is indicated by a
@@ -356,7 +361,7 @@ rather than from the root of the file system.
 In the previous command, since we did not specify an **absolute path** it ran the command on the relative path from our current directory
 (implicitly using the `.` hidden directory), and so listed the contents of our current directory.
 
-We will now navigate to the parent directory, the simplest way do do this is to use the relative path `..`.
+We will now navigate to the parent directory, the simplest way do this is to use the relative path `..`.
 
 ```
 {{ site.remote.prompt }} cd ..
@@ -377,6 +382,62 @@ We should now be back in `{{ site.working_dir[0] }}`.
 ```
 
 {: .output}
+
+> ## Tab completion
+>
+> Sometimes file paths and file names can be very long, making typing out the path tedious.
+> One trick you can use to save yourself time is to use something called **tab completion**.
+> If you start typing the path in a command and there is only one possible match,
+> if you hit tab the path will autocomplete (until there are more than one possible matches).
+>
+> > ## Solution
+> >
+> >For example, if you type:
+> >
+> > ```
+> > {{ site.remote.prompt }} cd {{ site.working_dir | last | slice: 0,3 }}
+> > ```
+> >
+> > {: .language-bash}
+> >
+> > and then press <kbd>Tab</kbd> (the tab key on your keyboard),
+> > the shell automatically completes the directory name for you (since there is only one possible match):
+> >
+> > ```
+> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/
+> > ```
+> >
+> > {: .language-bash}
+> >
+> > However, you want to move to your personal working directory. If you hit <kbd>Tab</kbd> once you will
+> > likely see nothing change, as there are more than one possible options. Hitting <kbd>Tab</kbd>
+> > a second time will print all possible autocomplete options.
+> >
+> > ```
+> > cwal219/    riom/    harrellw/
+> > ```
+> >
+> > {: .output}
+> >
+> >Now entering in the first few characters of the path (just enough that the possible options are no longer ambiguous) and pressing <kbd>Tab</kbd> again, should complete the path.
+> >
+> > Now press <kbd>Enter</kbd> to execute the command.
+> >
+> > ```
+> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/<username>
+> > ```
+> >
+> > {: .language-bash}
+> >
+> > Check that we've moved to the right place by running `pwd`.
+> >
+> > ```
+> > {{ site.working_dir | join: '/' }}/<username>
+> > ```
+> >
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 > ## Two More Shortcuts
 >

@@ -53,7 +53,7 @@ This means that all CPUs must be on the same node, most Mahuika nodes have 72 CP
 Shared memory parallelism is what is used in our example script `{{ site.example.script }}`.
 
 Number of threads to use is specified by the Slurm option `--cpus-per-task`.
-
+<!-- 
 > ## Shared Memory Example
 >
 > Create a new script called `smp-job.sl`
@@ -98,7 +98,7 @@ Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 > >
 > > {: .output}
 > {: .solution}
-{: .challenge}
+{: .challenge} -->
 
 ### Distributed-Memory (MPI)
 
@@ -114,7 +114,7 @@ Number of tasks to use is specified by the Slurm option `--ntasks`, because the 
 
 Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-task` unspecified will get you `2`.
 
-> ## Distributed Memory Example
+<!-- > ## Distributed Memory Example
 >
 > Create a new script called `mpi-job.sl`
 >
@@ -153,10 +153,10 @@ Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-t
 > > ```
 > > {: .output}
 > {: .solution}
-{: .challenge}
+{: .challenge} -->
 
 Using a combination of Shared and Distributed memory is called _Hybrid Parallel_.
-
+<!-- 
 > ## Hybrid Example
 >
 > Create a new script called `hybrid-job.sl`
@@ -193,7 +193,7 @@ Using a combination of Shared and Distributed memory is called _Hybrid Parallel_
 > > ```
 > > {: .output}
 > {: .solution}
-{: .challenge}
+{: .challenge} -->
 
 ### GPGPU's
 
@@ -209,7 +209,7 @@ GPUs can be requested using `--gpus-per-node=<gpu_type>:<gpu_number>`
 
 Depending on the GPU type, we *may* also need to specify a partition using `--partition`.
 
-> ## GPU Job Example
+<!-- > ## GPU Job Example
 >
 > Create a new script called `gpu-job.sl`
 >
@@ -266,7 +266,7 @@ Depending on the GPU type, we *may* also need to specify a partition using `--pa
 > > ```
 > > {: .output}
 > {: .solution}
-{: .challenge}
+{: .challenge} -->
 
 ### Job Array
 
@@ -282,7 +282,7 @@ A job array can be specified using `--array`
 
 If you are writing your own code, then this is something you will probably have to specify yourself.
 
-> ## Job Array Example
+<!-- > ## Job Array Example
 > 
 > Create a new script called `array-job.sl`
 >
@@ -331,7 +331,30 @@ If you are writing your own code, then this is something you will probably have 
 > > ```
 > > {: .output}
 > {: .solution}
-{: .challenge}
+{: .challenge} -->
+
+## Summary
+
+| Name | Other Names | Slurm Option | Pros/cons | 
+| - | - | - | - |
+| Shared Memory Parallelism | Multithreading, Multiproccessing | `--cpus-per-task` | |
+| Distrubuted Memory Parallelism | MPI, OpenMPI |  `--ntasks` and add `srun` before command | |
+| Hybrid | | `--ntasks` and `--cpus-per-task` and add `srun` before command | |
+| Job Array | | `--array` | |
+| General Purpose GPU | | `--gpus-per-node`  | |
+
+> ## Running a Parallel Job.
+> 
+> Pick one of the method of Paralellism mentioned above, and modify your `example.sl` script to use this method.
+> 
+>
+> 
+> > ## Solution
+> > 
+> > What does the printout say at the start of your job about number and location of node.
+> > {: .output}
+> {: .solution}
+{: .challenge} 
 
 ## How to Utilise Multiple CPUs
 
