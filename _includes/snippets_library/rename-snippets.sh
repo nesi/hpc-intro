@@ -31,7 +31,7 @@ rename_snip  ${PREFIX}/12/explore.snip  ${PREFIX}/12/specific-node-info.snip
 
 ## Episode 13: Scheduling jobs
 
-# {{ site.sched.submit.name }} {{ site.sched.submit.options }} example-job.sh
+# {{ site.sched.submit.name }} {{ site.sched.submit.options }} example_job.sh
 rename_snip  ${PREFIX}/13/submit_output.snip           ${PREFIX}/13/basic-job-script.snip
 #$ {{ site.sched.status }} {{ site.sched.flag.user }}
 rename_snip  ${PREFIX}/13/statu_output.snip            ${PREFIX}/13/basic-job-status.snip
@@ -41,11 +41,11 @@ rename_snip  ${PREFIX}/13/statu_name_output.snip       ${PREFIX}/13/job-with-nam
 rename_snip  ${PREFIX}/13/stat_options.snip            ${PREFIX}/13/option-flags-list.snip
 ## Print SLURM_CPUS_PER_TASK, PBS_O_WORKDIR, or similar
 rename_snip  ${PREFIX}/13/env_challenge.snip           ${PREFIX}/13/print-sched-variables.snip
-#$ {{ site.sched.submit.name }} {{ site.sched.submit.options }} example-job.sh
+#$ {{ site.sched.submit.name }} {{ site.sched.submit.options }} example_job.sh
 rename_snip  ${PREFIX}/13/long_job_cat.snip            ${PREFIX}/13/runtime-exceeded-job.snip
 #$ {{ site.sched.status }} {{ site.sched.flag.user }}
 rename_snip  ${PREFIX}/13/long_job_err.snip            ${PREFIX}/13/runtime-exceeded-output.snip
-#$ {{ site.sched.submit.name }} {{ site.sched.submit.options }} example-job.sh
+#$ {{ site.sched.submit.name }} {{ site.sched.submit.options }} example_job.sh
 #$ {{ site.sched.status }} {{ site.sched.flag.user }}
 rename_snip  ${PREFIX}/13/del_job_output1.snip         ${PREFIX}/13/terminate-job-begin.snip
 #$ {{site.sched.del }} 38759

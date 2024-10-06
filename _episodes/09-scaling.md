@@ -34,7 +34,7 @@ It is worth noting that Amdahl's law assumes all other elements of scaling are h
 
 > ## Scaling Exercise
 >
-> 1. Find your name in the [spreadsheet]({{ site.exercise }}) and modify your `example-job.sl` to request
+> 1. Find your name in the [spreadsheet]({{ site.exercise }}) and modify your `example_job.sl` to request
 > "x" `--cpus-per-task`. 
 > For example `#SBATCH --cpus-per-task 10`.
 > 2. Estimate memory requirement based on our previous runs and the cpus requested, memory
@@ -45,7 +45,7 @@ It is worth noting that Amdahl's law assumes all other elements of scaling are h
 > By default SLURM records job data every 30 seconds. 
 > This means any job running for less than 30
 > seconds will not have it's memory use recorded.
-> Submit the job with `sbatch --acctg-freq 1 example-job.sl`.
+> Submit the job with `sbatch --acctg-freq 1 example_job.sl`.
 > 4. Watch the job with `squeue --me` or `watch squeue --me`.
 > 5. On completion of job, use `nn_seff <job-id>`.
 > 6. Record the jobs "Elapsed", "TotalCPU", and "Memory" values in the spreadsheet. (Hint: They are the first 
