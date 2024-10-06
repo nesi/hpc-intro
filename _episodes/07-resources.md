@@ -22,10 +22,10 @@ math: True
 Last time we submitted a job, we did not specify a number of CPUs, and therefore
 we were provided the default of `2` (1 _core_).
 
-As a reminder, our slurm script `example-job.sl` currently looks like this.
+As a reminder, our slurm script `example_job.sl` currently looks like this.
 
 ```
-{% include example_scripts/example-job.sl.1 %}
+{% include example_scripts/example_job.sl.1 %}
 ```
 
 {: .language-bash}
@@ -35,7 +35,7 @@ We ask for more CPUs using by adding `#SBATCH --cpus-per-task 4` to our script.
 Your script should now look like this:
 
 ```
-{% include example_scripts/example-job.sl.2 %}
+{% include example_scripts/example_job.sl.2 %}
 ```
 
 {: .language-bash}
@@ -43,7 +43,7 @@ Your script should now look like this:
 And then submit using `sbatch` as we did before.
 
 ```
-{{ site.remote.prompt }} sbatch example-job.sl
+{{ site.remote.prompt }} sbatch example_job.sl
 ```
 
 {: .language-bash}
@@ -123,7 +123,11 @@ Memory efficiency can be determined by comparing <strong>ReqMem</strong> (reques
 
 <!-- {% include figure.html url="" max-width="75%" caption=""   file="/fig/mem_eff.svg"   alt="Memory Efficiency Formula" %} -->
 
+<br>
+
 $$ {Efficiency_{mem} = { MaxRSS \over ReqMem}} $$
+
+<br>
 
 So for the above example we see that <strong>0.1GB</strong> (102048K) of our requested <strong>1GB</strong> meaning the memory efficincy was about <strong>10%</strong>.
 
@@ -133,15 +137,21 @@ CPU efficiency can be determined by comparing <strong>TotalCPU</strong>(CPU time
 
 $$ {Efficiency_{cpu} = { TotalCPU \over {Elapsed \times Alloc}}} $$
 
+<br>
+
 For the above example <strong>33 seconds</strong> of computation was done,
 
 where the maximum possible computation time was **96 seconds** (<strong>2 CPUs</strong> multiplied by <strong>48 seconds</strong>), meaning the CPU efficiency was about <strong>35%</strong>.
 
 Time Efficiency is simply the <strong>Elapsed Time</strong> divided by <strong>Time Requested</strong>.
 
+<br>
+
 $$ {Efficiency_{time} = { Elapsed \over Requested}} $$
 
 <!-- {% include figure.html url="" max-width="75%" caption=""  file="/fig/time_eff.svg"  alt="Time Efficiency Formula" %}-->
+
+<br>
 
 <strong>48 seconcds</strong> out of <strong>15 minutes</strong> requested give a time efficiency of about <strong>5%</strong>
 
@@ -182,13 +192,13 @@ For convenience, NeSI has provided the command `nn_seff <jobid>` to calculate **
 Knowing what we do now about job efficiency, lets submit the previous job again but with more appropriate resources.
 
 ```
-{% include example_scripts/example-job.sl.2 %}
+{% include example_scripts/example_job.sl.2 %}
 ```
 {: .language-bash}
 
 
 ```
-{{ site.remote.prompt }} sbatch example-job.sl
+{{ site.remote.prompt }} sbatch example_job.sl
 ```
 {: .language-bash}
 

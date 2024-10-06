@@ -35,13 +35,6 @@ To understand the different types of Parallel Computing we first need to clarify
 
 Which methods are available to you is largely dependent on the nature of the problem and software being used.
 
-<!-- Exercises in this episode will require a copy of the `whothis.sh` file from the workshop directory.
-
-```
-{{ site.remote.prompt }}  cp ../whothis.sh .
-```
-{: .language-bash} -->
-
 ### Shared-Memory (SMP)
 
 Shared-memory multiproccessing divides work among _CPUs_ or _threads_, all of these threads require access to the same memory.
@@ -50,55 +43,9 @@ Often called *Multithreading*.
 
 This means that all CPUs must be on the same node, most Mahuika nodes have 72 CPUs.
 
-Shared memory parallelism is what is used in our example script `{{ site.example.script }}`.
+Shared memory parallelism is used in our example script `{{ site.example.script }}`.
 
 Number of threads to use is specified by the Slurm option `--cpus-per-task`.
-<!-- 
-> ## Shared Memory Example
->
-> Create a new script called `smp-job.sl`
->
-> ```
-> #!/bin/bash -e
-> 
-> #SBATCH --job-name        smp-job
-> #SBATCH --account         {{site.sched.projectcode}}
-> #SBATCH --output          %x.out
-> #SBATCH --mem-per-cpu     500
-> #SBATCH --cpus-per-task   8
-> 
-> echo -ne "Slurm Task ID:\t"
-> echo ${SLURM_PROCID}
-> echo -ne "On Node: \t"
-> echo $(hostname)
-> echo -n "Number of CPUs: "
-> echo $(nproc)
-> ```
-> {: .language-bash}
->
-> then submit with
->
-> ```
-> {{ site.remote.prompt }} sbatch smp-job.sl
-> ```
-> {: .language-bash}
->
-> > ## Solution
-> >
-> > Checking the output should reveal
-> >
-> > ```
-> > {{ site.remote.prompt }} cat smp-job.out
-> > ```
-> > {: .language-bash}
-> >
-> > ```
-> > I am task #0 running on node 'wbn224' with 8 CPUs
-> > ```
-> >
-> > {: .output}
-> {: .solution}
-{: .challenge} -->
 
 ### Distributed-Memory (MPI)
 
@@ -114,92 +61,12 @@ Number of tasks to use is specified by the Slurm option `--ntasks`, because the 
 
 Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-task` unspecified will get you `2`.
 
-<!-- > ## Distributed Memory Example
->
-> Create a new script called `mpi-job.sl`
->
-> ```
-> #!/bin/bash -e
->
-> #SBATCH --job-name        mpi-job
-> #SBATCH --account         {{site.sched.projectcode}} 
-> #SBATCH --output          %x.out
-> #SBATCH --mem-per-cpu     500
-> #SBATCH --ntasks          4
-> 
-> srun bash -c 'echo I am task \#${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs'
-> ```
-> {: .language-bash}
->
-> then submit with
->
-> ```
-> {{ site.remote.prompt }} sbatch mpi-job.sl
-> ```
-> {: .language-bash}
->
-> > ## Solution
-> > 
-> > ```
-> > {{ site.remote.prompt }} cat mpi-job.out
-> > ```
-> > {: .language-bash}
-> >
-> >```
-> > I am task #1 running on node 'wbn012' with 2 CPUs
-> > I am task #3 running on node 'wbn010' with 2 CPUs
-> > I am task #0 running on node 'wbn009' with 2 CPUs
-> > I am task #2 running on node 'wbn063' with 2 CPUs
-> > ```
-> > {: .output}
-> {: .solution}
-{: .challenge} -->
-
 Using a combination of Shared and Distributed memory is called _Hybrid Parallel_.
-<!-- 
-> ## Hybrid Example
->
-> Create a new script called `hybrid-job.sl`
->
-> ```
-> #!/bin/bash -e
-> 
-> #SBATCH --job-name        hybrid-job
-> #SBATCH --account         {{site.sched.projectcode}} 
-> #SBATCH --output          %x.out
-> #SBATCH --mem-per-cpu     500
-> #SBATCH --ntasks          2
-> #SBATCH --cpus-per-task   4
-> 
-> srun bash -c 'echo I am task \#${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs'
-> ```
-> {: .language-bash}
->
-> ```
-> {{ site.remote.prompt }} sbatch hybrid-job.sl
-> ```
-> {: .language-bash}
-> 
-> > ## Solution
-> > 
-> > ```
-> > {{ site.remote.prompt }} cat hybrid-job.out
-> >
-> > ```
-> >
-> > ```
-> > I am task #0 running on node 'wbn016' with 4 CPUs
-> > I am task #1 running on node 'wbn022' with 4 CPUs
-> > ```
-> > {: .output}
-> {: .solution}
-{: .challenge} -->
 
 ### GPGPU's
 
 GPUs compute large number of simple operation in parallel, making them well suited for Graphics Processing (hence the name), or any other large matrix operations.
 
-<!-- General-Purpose Graphics Processing Unit or GPGPU's are GPU's configured slightly differently. -->
 
 On NeSI, GPU's are specialised pieces of hardware that you request in addition to your CPUs and memory.
 
@@ -282,53 +149,23 @@ A job array can be specified using `--array`
 
 If you are writing your own code, then this is something you will probably have to specify yourself.
 
-<!-- > ## Job Array Example
-> 
-> Create a new script called `array-job.sl`
+## Summary
+
+| Name | Other Names | Slurm Option | Pros/cons |
+| - | - | - | - |
+| Shared Memory Parallelism | Multithreading, Multiproccessing | `--cpus-per-task` | Efficient, Can only be as large as one node |
+| Distrubuted Memory Parallelism | MPI, OpenMPI |  `--ntasks` and add `srun` before command | Can run across multiple nodes,  communication overheads |
+| Hybrid | | `--ntasks` and `--cpus-per-task` and add `srun` before command | Best of both SMP and DMP, More complex |
+| Job Array | | `--array` | Best throughput and efficiency, Requires embarrassingly paralell work  |
+| General Purpose GPU | | `--gpus-per-node`  | Very fast, Requires code written for GPUs |
+
+> ## Running a Parallel Job.
 >
-> ```
-> #!/bin/bash -e
+> Pick one of the method of Paralellism mentioned above, and modify your `example.sl` script to use this method.
 >
-> #SBATCH --job-name        array-job
-> #SBATCH --account         nesi99991
-> #SBATCH --output          %x_%a.out
-> #SBATCH --mem-per-cpu     500
-> #SBATCH --array           0-3
-> 
-> echo "I am task #${SLURM_PROCID} running on node '$(hostname)' with $(nproc) CPUs"
-> ```
-> {: .language-bash}
-> 
-> then submit with
-> 
-> ```
-> {{ site.remote.prompt }} sbatch array-job.sl
-> ```
-> {: .language-bash}
-> 
 > > ## Solution
-> > 
-> > ```
-> > ls
-> > ```
-> > {: .language-bash}
 > >
-> > ```
-> > array-job_0.out array-job_1.out array-job_2.out array-job_3.out
-> > ```
-> > {: .output}
-> > 
-> > Each of which should contain,
-> > 
-> > 
-> > ```
-> >  {{ site.remote.prompt }} cat array-job*.out
-> > ```
-> > {: .language-bash}
-> >
-> > ```
-> > I am task #0 running on node 'wbn*' with 2 CPUs
-> > ```
+> > What does the printout say at the start of your job about number and location of node.
 > > {: .output}
 > {: .solution}
 {: .challenge} -->

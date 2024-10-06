@@ -53,17 +53,17 @@ This is where _batch processing_ becomes useful, this is where instead of enteri
 
 [//]: # TODO ??Diagram??
 
-Lets try this now, create and open a new file in your current directory called `example-job.sh`.
+Lets try this now, create and open a new file in your current directory called `example_job.sh`.
 (If you prefer another text editor than nano, feel free to use that), we will put to use some things we have learnt so far.
 
 ```
-{{ site.remote.prompt }} nano example-job.sh
+{{ site.remote.prompt }} nano example_job.sh
 ```
 {: .language-bash}
 
 
 ```
-{% include example_scripts/example-job.sh %}
+{% include example_scripts/example_job.sh %}
 ```
 {: .language-bash}
 
@@ -75,7 +75,7 @@ Lets try this now, create and open a new file in your current directory called `
 
 We can now run this script using
 ```
-{{ site.remote.prompt }} bash example-job.sh
+{{ site.remote.prompt }} bash example_job.sh
 ```
 {: .language-bash}
 
@@ -109,7 +109,7 @@ Up until now the scheduler has not been involved, our scripts were run directly 
 First lets rename our batch script script to clarify that we intend to run it though the scheduler.
 
 ```
-mv example-job.sh example-job.sl
+mv example_job.sh example_job.sl
 ```
 {: .output}
 
@@ -166,7 +166,7 @@ later episode of this lesson.
 Now, rather than running our script with `bash` we _submit_ it to the scheduler using the command `sbatch` (**s**lurm **batch**).
 
 ```
-{{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}example-job.sl
+{{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}example_job.sl
 ```
 {: .language-bash}
 
@@ -206,7 +206,7 @@ Sometimes we'll make a mistake and need to cancel a job. This can be done with
 the `{{ site.sched.del }}` command.
 
 <!-- ```
-{{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}example-job.sl
+{{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}example_job.sl
 {{ site.remote.prompt }} {{ site.sched.status }} {{ site.sched.flag.me }}
 ```
 {: .language-bash} -->
@@ -281,7 +281,7 @@ killed. Let's use wall time as an example. We will request 1 minute of
 wall time, and attempt to run a job for two minutes.
 
 ```
-{{ site.remote.prompt }} nano example-job.sl
+{{ site.remote.prompt }} nano example_job.sl
 ```
 {: .language-bash}
 
@@ -300,7 +300,7 @@ Submit the job and wait for it to finish. Once it is has finished, check the
 log file.
 
 ```
-{{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}example-job.sh
+{{ site.remote.prompt }} {{ site.sched.submit.name }} {% if site.sched.submit.options != '' %}{{ site.sched.submit.options }} {% endif %}example_job.sh
 {{ site.remote.prompt }} {{ site.sched.status }} {{ site.sched.flag.me }}
 ```
 {: .language-bash}
