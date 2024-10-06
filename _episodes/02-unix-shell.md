@@ -28,6 +28,66 @@ keypoints:
 - "Directory names in a path are separated with `/` on Unix, but `\\` on Windows."
 - "`..` means 'the directory above the current one'; `.` on its own means 'the current directory'."
 ---
+The NeSI filesystem looks something like this:
+
+![The file system is made up of a root directory that contains sub-directories
+titled home, nesi, and system files](../fig/NesiFiletree.svg)
+
+The directories that are relevant to us are.
+
+<table style="width: 100%; height: 90px;">
+<tbody>
+<tr>
+<td style="width: 300px;"></td>
+<td style="width: 250px;">Location</td>
+<td style="width: 167.562px;">Default Storage</td>
+<td style="width: 142.734px;">Default Files</td>
+<td style="width: 89.3594px;">Backup</td>
+<td style="width: 155.188px;">Access Speed</td>
+</tr>
+<tr>
+<td style="width: 300px;"><strong>Home</strong> is for user-specific files such as configuration files, environment setup, source code, etc.</td>
+<td style="width: 250px;"><code>/home/&lt;username&gt;</code></td>
+<td style="width: 167.562px;">20GB</td>
+<td style="width: 142.734px;">1,000,000</td>
+<td style="width: 89.3594px;">Daily</td>
+<td style="width: 155.188px;">Normal</td>
+</tr>
+<tr>
+<td style="width: 300px;"><strong>Project</strong> is for persistent project-related data, project-related software, etc.</td>
+<td style="width: 250px;"><code>/nesi/project/&lt;projectcode&gt;</code></td>
+<td style="width: 167.562px;">100GB</td>
+<td style="width: 142.734px;">100,000</td>
+<td style="width: 89.3594px;">Daily</td>
+<td style="width: 155.188px;">Normal</td>
+</tr>
+<tr>
+<td style="width: 300px;"><strong>Nobackup</strong> is a 'scratch space', for data you don't need to keep long term. Old data is periodically deleted from nobackup</td>
+<td style="width: 250px;"><code>/nesi/nobackup/&lt;projectcode&gt;</code></td>
+<td style="width: 167.562px;">10TB</td>
+<td style="width: 142.734px;">1,000,000</td>
+<td style="width: 89.3594px;">None</td>
+<td style="width: 155.188px;">Fast</td>
+</tr>
+</tbody>
+</table>
+
+### Managing your data and storage (backups and quotas)
+
+NeSI performs backups of the `/home` and `/nesi/project` (persistent) filesystems.  However, backups are only captured once per day.  So, if you edit or change code or data and then immediately delete it, it likely cannot be recovered.  Note, as the name suggests, NeSI does **not** backup the `/nesi/nobackup` filesystem.
+
+Protecting critical data from corruption or deletion is primarily your
+responsibility. Ensure you have a data management plan and stick to the plan to reduce the chance of data loss.  Also important is managing your storage quota.  To check your quotas, use the `nn_storage_quota` command, eg
+
+{% include {{ site.snippets }}/filedir/sinfo.snip %}
+
+As well as disk space, 'inodes' are also tracked, this is the *number* of files.
+
+Notice that the project space for this user is over quota and has been locked, meaning no more data can be added.  When your space is locked you will need to move or remove data.  Also note that none of the nobackup space is being used.  Likely data from project can be moved to nobackup. `nn_storage_quota` uses cached data, and so will no immediately show changes to storage use.
+
+For more details on our persistent and nobackup storage systems, including data retention and the nobackup autodelete schedule,
+please see our [Filesystem and Quota](https://docs.nesi.org.nz/Storage/File_Systems_and_Quotas/NeSI_File_Systems_and_Quotas/) documentation.
+
 > ## The Unix Shell
 >
 > This episode will be a quick introduction to the Unix shell, only the bare minimum required to use the cluster.
