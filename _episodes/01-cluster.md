@@ -1,4 +1,4 @@
-![NeSI-HPC-Facility](https://github.com/user-attachments/assets/e9e6eda6-b1c7-4f55-84c0-965b9ac3ccd7)---
+---
 title: "Working on a remote HPC system"
 # teaching: 10
 teaching: 20

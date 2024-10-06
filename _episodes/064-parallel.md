@@ -1,6 +1,6 @@
 ---
 title: "What is Parallel Computing"
-teaching: 30
+teaching: 20
 exercises: 10
 questions:
 - "How do we execute a task in parallel?"
