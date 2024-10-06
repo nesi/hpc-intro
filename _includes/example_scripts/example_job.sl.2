@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-#SBATCH --job-name      my_job
+#SBATCH --job-name      example_job
 #SBATCH --account       nesi99991
 #SBATCH --mem           300M
 #SBATCH --time          00:15:00
@@ -8,5 +8,5 @@
 
 module purge
 module load R/4.3.1-gimkl-2022a
-{{ site.example.shell }}  {{ site.example.script }} 
+Rscript sum_matrix.r
 echo "Done!"

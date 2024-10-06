@@ -210,7 +210,7 @@ set.seed(seed)
 Now your script should look something like this;
 
 ```
-{% include example_scripts/array_sum2.r %}
+{% include example_scripts/sum_matrix.r %}
 ```
 {: .language-r}
 
