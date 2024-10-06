@@ -28,6 +28,23 @@ keypoints:
 - "Directory names in a path are separated with `/` on Unix, but `\\` on Windows."
 - "`..` means 'the directory above the current one'; `.` on its own means 'the current directory'."
 ---
+> ## The Unix Shell
+>
+> This episode will be a quick introduction to the Unix shell, only the bare minimum required to use the cluster.
+>
+> The Software Carpentry '[Unix Shell](https://swcarpentry.github.io/shell-novice/)' lesson covers the subject in more depth, we recommend you check it out.
+>
+{: .callout}
+
+The part of the operating system responsible for managing files and directories
+is called the **file system**.
+It organizes our data into files,
+which hold information,
+and directories (also called 'folders'),
+which hold files or other directories.
+
+Understanding how to navigate the file system using command line is essential for using an HPC.
+
 The NeSI filesystem looks something like this:
 
 ![The file system is made up of a root directory that contains sub-directories
@@ -88,22 +105,6 @@ Notice that the project space for this user is over quota and has been locked, m
 For more details on our persistent and nobackup storage systems, including data retention and the nobackup autodelete schedule,
 please see our [Filesystem and Quota](https://docs.nesi.org.nz/Storage/File_Systems_and_Quotas/NeSI_File_Systems_and_Quotas/) documentation.
 
-> ## The Unix Shell
->
-> This episode will be a quick introduction to the Unix shell, only the bare minimum required to use the cluster.
->
-> The Software Carpentry '[Unix Shell](https://swcarpentry.github.io/shell-novice/)' lesson covers the subject in more depth, we recommend you check it out.
->
-{: .callout}
-
-The part of the operating system responsible for managing files and directories
-is called the **file system**.
-It organizes our data into files,
-which hold information,
-and directories (also called 'folders'),
-which hold files or other directories.
-
-Understanding how to navigate the file system using command line is essential for using an HPC.
 
 Directories are like *places* — at any time
 while we are using the shell, we are in exactly one place called
