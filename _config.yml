@@ -120,8 +120,7 @@ kind: "lesson"
 # Workshop working directory.
 working_dir:
   - /nesi/nobackup/nesi99991
-  - ASP_winterschool2024
-  - workspace
+  - introhpc2410
 
 # Start time in minutes (0 to be clock-independent, 540 to show a start at 09:00 am).
 # 600 is 10am
