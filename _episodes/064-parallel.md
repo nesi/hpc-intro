@@ -67,7 +67,6 @@ Using a combination of Shared and Distributed memory is called _Hybrid Parallel_
 
 GPUs compute large number of simple operation in parallel, making them well suited for Graphics Processing (hence the name), or any other large matrix operations.
 
-
 On NeSI, GPU's are specialised pieces of hardware that you request in addition to your CPUs and memory.
 
 You can find an up-to-date(ish) list of GPUs available on NeSI in our [Support Documentation](https://docs.nesi.org.nz/Scientific_Computing/The_NeSI_High_Performance_Computers/Available_GPUs_on_NeSI/)
@@ -76,7 +75,7 @@ GPUs can be requested using `--gpus-per-node=<gpu_type>:<gpu_number>`
 
 Depending on the GPU type, we *may* also need to specify a partition using `--partition`.
 
-## GPU Job Example
+> ## GPU Job Example
 >
 > Create a new script called `gpu-job.sl`
 >
@@ -93,16 +92,16 @@ Depending on the GPU type, we *may* also need to specify a partition using `--pa
 > nvidia-smi  
 > ```
 > {: .language-bash}
-> 
+>
 > then submit with
-> 
+>
 > ```
 > {{ site.remote.prompt }} sbatch gpu-job.sl
 > ```
 > {: .language-bash}
-> 
+>
 > > ## Solution
-> > 
+> >
 > > ```
 > > {{ site.remote.prompt }} cat gpu-job.out
 > >
@@ -149,50 +148,6 @@ A job array can be specified using `--array`
 
 If you are writing your own code, then this is something you will probably have to specify yourself.
 
-## Summary
-
-| Name | Other Names | Slurm Option | Pros/cons |
-| - | - | - | - |
-| Shared Memory Parallelism | Multithreading, Multiproccessing | `--cpus-per-task` | Efficient, Can only be as large as one node |
-| Distrubuted Memory Parallelism | MPI, OpenMPI |  `--ntasks` and add `srun` before command | Can run across multiple nodes,  communication overheads |
-| Hybrid | | `--ntasks` and `--cpus-per-task` and add `srun` before command | Best of both SMP and DMP, More complex |
-| Job Array | | `--array` | Best throughput and efficiency, Requires embarrassingly paralell work  |
-| General Purpose GPU | | `--gpus-per-node`  | Very fast, Requires code written for GPUs |
-
-> ## Running a Parallel Job.
->
-> Pick one of the method of Paralellism mentioned above, and modify your `example.sl` script to use this method.
->
-> > ## Solution
-> >
-> > What does the printout say at the start of your job about number and location of node.
-> > {: .output}
-> {: .solution}
-{: .challenge} -->
-
-## Summary
-
-| Name | Other Names | Slurm Option | Pros/cons | 
-| - | - | - | - |
-| Shared Memory Parallelism | Multithreading, Multiproccessing | `--cpus-per-task` | |
-| Distrubuted Memory Parallelism | MPI, OpenMPI |  `--ntasks` and add `srun` before command | |
-| Hybrid | | `--ntasks` and `--cpus-per-task` and add `srun` before command | |
-| Job Array | | `--array` | |
-| General Purpose GPU | | `--gpus-per-node`  | |
-
-> ## Running a Parallel Job.
-> 
-> Pick one of the method of Paralellism mentioned above, and modify your `example.sl` script to use this method.
-> 
->
-> 
-> > ## Solution
-> > 
-> > What does the printout say at the start of your job about number and location of node.
-> > {: .output}
-> {: .solution}
-{: .challenge} 
-
 ## How to Utilise Multiple CPUs
 
 Requesting extra resources through Slurm only means that more resources will be available, it does not guarantee your program will be able to make use of them.
@@ -221,5 +176,27 @@ However, unless that function is where the majority of time is spent, this is un
 *Python: [Multiproccessing](https://docs.python.org/3/library/multiprocessing.html)* (not to be confused with `threading` which is not really parallel.)
 
 *MATLAB: [Parpool](https://au.mathworks.com/help/parallel-computing/parpool.html)*
+
+## Summary
+
+| Name | Other Names | Slurm Option | Pros/cons |
+| - | - | - | - |
+| Shared Memory Parallelism | Multithreading, Multiproccessing | `--cpus-per-task` | |
+| Distrubuted Memory Parallelism | MPI, OpenMPI |  `--ntasks` and add `srun` before command | |
+| Hybrid | | `--ntasks` and `--cpus-per-task` and add `srun` before command | |
+| Job Array | | `--array` | |
+| General Purpose GPU | | `--gpus-per-node`  | |
+
+> ## Running a Parallel Job.
+>
+> Pick one of the method of Paralellism mentioned above, and modify your `example.sl` script to use this method.
+>
+>
+> > ## Solution
+> >
+> > What does the printout say at the start of your job about number and location of node.
+> > {: .output}
+> {: .solution}
+{: .challenge}
 
 {% include links.md %}
