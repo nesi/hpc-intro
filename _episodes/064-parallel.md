@@ -181,11 +181,11 @@ However, unless that function is where the majority of time is spent, this is un
 
 | Name | Other Names | Slurm Option | Pros/cons |
 | - | - | - | - |
-| Shared Memory Parallelism | Multithreading, Multiproccessing | `--cpus-per-task` | |
-| Distrubuted Memory Parallelism | MPI, OpenMPI |  `--ntasks` and add `srun` before command | |
-| Hybrid | | `--ntasks` and `--cpus-per-task` and add `srun` before command | |
-| Job Array | | `--array` | |
-| General Purpose GPU | | `--gpus-per-node`  | |
+| Shared Memory Parallelism | Multithreading, Multiproccessing | `--cpus-per-task` | does not have to use interconnect/can only use max one node |
+| Distrubuted Memory Parallelism | MPI, OpenMPI |  `--ntasks` and add `srun` before command | can use any number of nodes/does have to use interconnect |
+| Hybrid | | `--ntasks` and `--cpus-per-task` and add `srun` before command | best of both!/can be tricky to set-up and get right |
+| Job Array | | `--array` | most efficient form of parallelism/not as flexible and requires more manual set-up in Slurm script |
+| General Purpose GPU | | `--gpus-per-node`  | GPUs can accelerate your code A LOT/sometimes GPUs are all busy |
 
 > ## Running a Parallel Job.
 >
