@@ -65,7 +65,7 @@ Using a combination of Shared and Distributed memory is called _Hybrid Parallel_
 
 ### GPGPU's
 
-GPUs compute large number of simple operation in parallel, making them well suited for Graphics Processing (hence the name), or any other large matrix operations.
+GPUs compute large number of simple operations in parallel, making them well suited for Graphics Processing (hence the name), or any other large matrix operations.
 
 
 On NeSI, GPU's are specialised pieces of hardware that you request in addition to your CPUs and memory.
@@ -141,9 +141,9 @@ Job arrays are not "multiproccessing" in the same way as the previous two method
 Ideal for _embarrassingly parallel_ problems, where there are little to no dependencies between the different jobs.
 
 Can be thought of less as running a single job in parallel and more about running multiple serial-jobs simultaneously.
-Often this will involve running the same process is run on multiple inputs.
+Often this will involve running the same process on multiple inputs.
 
-Embarrassingly parallel jobs should be able scale without any loss of efficiency. If this type of parallelisation is an option, it will almost certainly be the best choice.
+Embarrassingly parallel jobs should be able to scale without any loss of efficiency. If this type of parallelisation is an option, it will almost certainly be the best choice.
 
 A job array can be specified using `--array`
 
