@@ -383,61 +383,51 @@ We should now be back in `{{ site.working_dir[0] }}`.
 
 {: .output}
 
-> ## Tab completion
->
-> Sometimes file paths and file names can be very long, making typing out the path tedious.
-> One trick you can use to save yourself time is to use something called **tab completion**.
-> If you start typing the path in a command and there is only one possible match,
-> if you hit tab the path will autocomplete (until there are more than one possible matches).
->
-> > ## Solution
-> >
-> >For example, if you type:
-> >
-> > ```
-> > {{ site.remote.prompt }} cd {{ site.working_dir | last | slice: 0,3 }}
-> > ```
-> >
-> > {: .language-bash}
-> >
-> > and then press <kbd>Tab</kbd> (the tab key on your keyboard),
-> > the shell automatically completes the directory name for you (since there is only one possible match):
-> >
-> > ```
-> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/
-> > ```
-> >
-> > {: .language-bash}
-> >
-> > However, you want to move to your personal working directory. If you hit <kbd>Tab</kbd> once you will
-> > likely see nothing change, as there are more than one possible options. Hitting <kbd>Tab</kbd>
-> > a second time will print all possible autocomplete options.
-> >
-> > ```
-> > cwal219/    riom/    harrellw/
-> > ```
-> >
-> > {: .output}
-> >
-> >Now entering in the first few characters of the path (just enough that the possible options are no longer ambiguous) and pressing <kbd>Tab</kbd> again, should complete the path.
-> >
-> > Now press <kbd>Enter</kbd> to execute the command.
-> >
-> > ```
-> > {{ site.remote.prompt }} cd {{ site.working_dir | last }}/<username>
-> > ```
-> >
-> > {: .language-bash}
-> >
-> > Check that we've moved to the right place by running `pwd`.
-> >
-> > ```
-> > {{ site.working_dir | join: '/' }}/<username>
-> > ```
-> >
-> > {: .output}
-> {: .solution}
-{: .challenge}
+## Tab completion
+
+ Sometimes file paths and file names can be very long, making typing out the path tedious.
+ One trick you can use to save yourself time is to use something called **tab completion**.
+ If you start typing the path in a command and there is only one possible match,
+ if you hit tab the path will autocomplete (until there are more than one possible matches).
+
+For example, if you type:
+
+```
+{{ site.remote.prompt }} cd {{ site.working_dir | last | slice: 0,3 }}
+```
+{: .language-bash}
+
+and then press <kbd>Tab</kbd> (the tab key on your keyboard),
+the shell automatically completes the directory name for you (since there is only one possible match):
+
+```
+{{ site.remote.prompt }} cd {{ site.working_dir | last }}/
+```
+{: .language-bash}
+
+ However, you want to move to your personal working directory. If you hit <kbd>Tab</kbd> once you will
+ likely see nothing change, as there are more than one possible options. Hitting <kbd>Tab</kbd>
+ a second time will print all possible autocomplete options.
+
+```
+cwal219/    riom/    harrellw/
+```
+{: .output}
+
+Now entering in the first few characters of the path (just enough that the possible options are no longer ambiguous) and pressing <kbd>Tab</kbd> again, should complete the path.
+
+ Now press <kbd>Enter</kbd> to execute the command.
+
+```
+{{ site.remote.prompt }} cd {{ site.working_dir | last }}/<username>
+```
+{: .language-bash}
+
+Check that we've moved to the right place by running `pwd`.
+
+```
+{{ site.working_dir | join: '/' }}/<username>
+```
 
 > ## Two More Shortcuts
 >
@@ -546,47 +536,77 @@ directories "backup" and "thing"; "/Users/backup" contains "original",
 >
 > `*` is a **wildcard**, which matches zero or more characters.
 >
-> Inside the {{ site.working_dir | join: '/' }} directory there is a directory called `birds` which contains the following files
-> `kaka.txt  kakapo.jpeg  kea.txt  kiwi.jpeg  pukeko.jpeg`
-> > ```
-> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds
-> > ```
+> Inside the `{{ site.working_dir | join: '/' }}` directory there is a directory called `birds`
+>
+>```
+>{{ site.remote.prompt }} cd {{ site.working_dir | join: '/' }}/birds
+>{{ site.remote.prompt }} ls
+>```
+> {: .language-bash}
+>
+> ```
+> kaka.txt  kakapo.jpeg  kea.txt  kiwi.jpeg  pukeko.jpeg
+> ```
+> {: .output}
+>
 > In this example there aren't many files, but it is easy to imagine a situation where you have hundreds or thousads of files you need to filter through, and globbing is the perfect tool for this. Using the wildcard character the command
-> > ```
-> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds/ka*
-> > ```
+>
+>```
+>{{ site.remote.prompt }} ls ka*
+>```
+> {: .language-bash}
+>
 > Will return:
-> > ```
-> > kaka.txt  kakapo.jpeg
-> > ```
+>
+>```
+>kaka.txt  kakapo.jpeg
+>```
+> {: .output}
+>
 > Since the pattern `ka*` will match `kaka.txt`and `kakapo.jpeg` as these both start with "ka". While the command:
-> > ```
-> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds/*.jpeg
-> > ```
+>
+>```
+>{{ site.remote.prompt }} ls *.jpeg
+>```
+> {: .language-bash}
+>
 > Will return:
-> Since the pattern `ka*` will match `kaka.txt`and `kakapo.jpeg` as these both start with "ka". While the command:
-> > ```
-> > kakapo.jpeg  kiwi.jpeg  pukeko.jpeg
-> > ```
-> As `*.jpeg` will match  `kakapo.jpeg`, `kiwi.jpeg` and `pukeko.jpeg` as they all end in ".jpeg"
+>
+>```
+>kakapo.jpeg  kiwi.jpeg  pukeko.jpeg
+>```
+> {: .output}
+>
+> As `*.jpeg` will match  `kakapo.jpeg`, `kiwi.jpeg` and `pukeko.jpeg` as they all end in `.jpeg`
 > You can use multiple wildcards as well with the command:
-> > ```
-> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds/k*a.*
-> > ```
+>
+>```
+>{{ site.remote.prompt }} ls k*a.*
+>```
+> {: .language-bash}
+>
 > Returning:
-> > ```
-> > kaka.txt  kea.txt
-> > ```
+>
+>```
+>kaka.txt  kea.txt
+>```
+> {: .output}
+>
 > As `k*a.*` will match just `kaka.txt` and `kea.txt`
 >
 > `?` is also a wildcard, but it matches exactly one character. So the command:
-> > ```
-> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds/????.*
-> > ```
+>
+>```
+>{{ site.remote.prompt }} ls ????.*
+>```
+> {: .language-bash}
+>
 > Would return:
-> > ```
-> > kaka.txt  kiwi.jpeg
-> > ```
+>```
+>kaka.txt  kiwi.jpeg
+>```
+> {: .output}
+>
 > As `kaka.txt` and `kiwi.jpeg` the only files which have four characters, followed by a `.` then any number and combination of characters.
 >
 > When the shell sees a wildcard, it expands the wildcard to create a
@@ -646,7 +666,6 @@ Now let's create a file. To do this we will use a text editor called Nano to cre
 ```
 {{ site.remote.prompt }} nano draft.txt
 ```
-
 {: .language-bash}
 
 > ## Which Editor?
@@ -711,23 +730,20 @@ but `ls` now shows that we have created a file called `draft.txt`:
 ```
 {{ site.remote.prompt }} ls
 ```
-
 {: .language-bash}
 
 ```
 draft.txt
 ```
-
 {: .output}
 
 ## Copying files and directories
 
-In a future lesson, we will be running the R script ```{{ site.working_dir | join: '/' }}/{{ site.example.script }} ```, but as we can't all work on the same file at once you will need to take your own copy. This can be done with the **c**o**p**y command `cp`, at least two arguments are needed the file (or directory) you want to copy, and the directory (or file) where you want the copy to be created. We will be copying the file into the directory we made previously, as this should be your current directory the second argument can be a simple `.`.
+In a future lesson, we will be running the R script ```{{ site.working_dir | join: '/' }}/{{ site.example.script }}```, but as we can't all work on the same file at once you will need to take your own copy. This can be done with the **c**o**p**y command `cp`, at least two arguments are needed the file (or directory) you want to copy, and the directory (or file) where you want the copy to be created. We will be copying the file into the directory we made previously, as this should be your current directory the second argument can be a simple `.`.
 
 ```
 {{ site.remote.prompt }} cp {{ site.working_dir | join: '/' }}/{{ site.example.script }}  .
 ```
-
 {: .output}
 
 We can check that it did the right thing using `ls`
@@ -735,13 +751,11 @@ We can check that it did the right thing using `ls`
 ```
 {{ site.remote.prompt }} ls
 ```
-
 {: .language-bash}
 
 ```
 draft.txt   {{ site.example.script }} 
 ```
-
 {: .output}
 
 ## Other File operations
@@ -817,14 +831,12 @@ For `mv` and `cp` if the destination path (final argument) is an existing direct
 > ```
 > $ ls -j
 > ```
->
 > {: .language-bash}
 >
 > ```
 > ls: invalid option -- 'j'
 > Try 'ls --help' for more information.
 > ```
->
 > {: .error}
 {: .callout}
 
@@ -835,7 +847,6 @@ Commands will often have many **options**. Most commands have a `--help` flag, a
 ```
 {{ site.remote.prompt }} man ls
 ```
-
 {: .language-bash}
 
 ```
@@ -865,7 +876,6 @@ Mandatory arguments to long options are mandatory for short options, too.
   -F, --classify             append indicator (one of */=>@|) to entries
 ...        ...        ...
 ```
-
 {: .output}
 
 To navigate through the `man` pages,
