@@ -546,16 +546,48 @@ directories "backup" and "thing"; "/Users/backup" contains "original",
 >
 > `*` is a **wildcard**, which matches zero or more characters.
 >
-> Consider a directory containing the following files
+> Inside the {{ site.working_dir | join: '/' }} directory there is a directory called `birds` which contains the following files
 > `kaka.txt  kakapo.jpeg  kea.txt  kiwi.jpeg  pukeko.jpeg`
+> > ```
+> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds
+> > ```
+> In this example there aren't many files, but it is easy to imagine a situation where you have hundreds or thousads of files you need to filter through, and globbing is the perfect tool for this. Using the wildcard character the command
+> > ```
+> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds/ka*
+> > ```
+> Will return:
+> > ```
+> > kaka.txt  kakapo.jpeg
+> > ```
+> Since the pattern `ka*` will match `kaka.txt`and `kakapo.jpeg` as these both start with "ka". While the command:
+> > ```
+> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds/*.jpeg
+> > ```
+> Will return:
+> Since the pattern `ka*` will match `kaka.txt`and `kakapo.jpeg` as these both start with "ka". While the command:
+> > ```
+> > kakapo.jpeg  kiwi.jpeg  pukeko.jpeg
+> > ```
+> As `*.jpeg` will match  `kakapo.jpeg`, `kiwi.jpeg` and `pukeko.jpeg` as they all end in ".jpeg"
+> You can use multiple wildcards as well with the command:
+> > ```
+> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds/k*a.*
+> > ```
+> Returning:
+> > ```
+> > kaka.txt  kea.txt
+> > ```
+> As `k*a.*` will match just `kaka.txt` and `kea.txt`
 >
-> The pattern `ka*` will match `kaka.txt`and `kakapo.jpeg` as these both start with "ka".
-> Where as `*.jpeg` will match  `kakapo.jpeg`, `kiwi.jpeg` and `pukeko.jpeg` as they all end in ".jpeg"
-> `k*a.*` will match just `kaka.txt` and `kea.txt`
->
-> `?` is also a wildcard, but it matches exactly one character.
->
-> `????.*` would return `kaka.txt` and `kiwi.jpeg`.
+> `?` is also a wildcard, but it matches exactly one character. So the command:
+> > ```
+> > {{ site.remote.prompt }} ls {{ site.working_dir | last }}/birds/????.*
+> > ```
+> Would return:
+> > ```
+> > kaka.txt  kiwi.jpeg
+> > ```
+> As `kaka.txt` and `kiwi.jpeg` the only files which have four characters, followed by a `.` then any number and combination of characters.
 >
 > When the shell sees a wildcard, it expands the wildcard to create a
 > list of matching filenames *before* running the command that was
@@ -714,6 +746,8 @@ draft.txt   {{ site.example.script }}
 
 ## Other File operations
 
+`cat` stands for concatenate, meaning to link or merge things together. It is primarily used for printing the contents of one or more files to the standard output.
+`head` and `tail` will print the first or last lines (head or tail) of the specified file(s). By default it will print 10 lines, but a specific number of lines can be specified with the `-n`  option.
 `mv` to **m**o**v**e move a file, is used similarly to `cp` taking a source argument(s) and a destination argument.
 `rm` will **r**e**m**ove move a file and only needs one argument.
 
