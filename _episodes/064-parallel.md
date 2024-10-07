@@ -25,9 +25,9 @@ To understand the different types of Parallel Computing we first need to clarify
 
 **CPU**: Unit that does the computations.
 
-**Task**: One or more CPUs that share memory.
+**Task**: Like a thread, but multiple tasks do not need to share memory.
 
-**Node**: The physical hardware. The upper limit on how many CPUs can be in a task.
+**Node**: A single computer of the cluster. Nodes are made up of CPUs and RAM.
 
 **Shared Memory**: When multiple CPUs are used within a single task.
 
@@ -51,7 +51,7 @@ Number of threads to use is specified by the Slurm option `--cpus-per-task`.
 
 Distributed-memory multiproccessing divides work among _tasks_, a task may contain multiple CPUs (provided they all share memory, as discussed previously).
 
-Message Passing Interface (MPI) is a communication standard for distributed-memory multiproccessing. While there are other standards, often 'MPI' is used synonymously with Distributed parallelism.  
+Message Passing Interface (MPI) is a communication standard for distributed-memory multiproccessing. While there are other standards, often 'MPI' is used synonymously with Distributed parallelism.
 
 Each task has it's own exclusive memory, tasks can be spread across multiple nodes, communicating via and _interconnect_. This allows MPI jobs to be much larger than shared memory jobs. It also means that memory requirements are more likely to increase proportionally with CPUs.
 
