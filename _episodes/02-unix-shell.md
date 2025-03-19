@@ -792,13 +792,53 @@ The same is true when deleting directories with `rm`
   <tr>
     <td><code>mv directory1/ directory2/</code></td>
   </tr>
-    <tr>
+   <tr>
     <td rowspan=2><code>rm</code></td>
     <td rowspan=2>remove</td>
     <td><code>rm file1 file2</code></td>
   </tr>
   <tr>
     <td><code>rm -r directory1/ directory2/</code></td>
+  </tr>
+   <tr>
+    <td rowspan=2><code>cat</code></td>
+    <td rowspan=2>concatinate</td>
+    <td><code>cat file1</code></td>
+  </tr>
+  <tr>
+    <td><code>cat file1 file2</code></td>
+  </tr>
+   <tr>
+    <td rowspan=2><code>rm</code></td>
+    <td rowspan=2>remove</td>
+    <td><code>rm file1 file2</code></td>
+  </tr>
+  <tr>
+    <td><code>rm -r directory1/ directory2/</code></td>
+  </tr>
+   <tr>
+    <td rowspan=2><code>cat</code></td>
+    <td rowspan=2>concatinate</td>
+    <td><code>cat file1</code></td>
+  </tr>
+  <tr>
+    <td><code>cat file1 file2</code></td>
+  </tr>
+   <tr>
+    <td rowspan=2><code>head</code></td>
+    <td rowspan=2>head</td>
+    <td><code>head file1</code></td>
+  </tr>
+  <tr>
+    <td><code>head -n 5 file1</code></td>
+  </tr>
+  <tr>
+    <td rowspan=2><code>tail</code></td>
+    <td rowspan=2>tail</td>
+    <td><code>tail file1</code></td>
+  </tr>
+  <tr>
+    <td><code>tail -n 5 file1</code></td>
   </tr>
 </table>
 
