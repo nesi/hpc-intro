@@ -4,45 +4,53 @@ title: Setup
 root: .
 ---
 
+## How to log in
 
-## NeSI JupyterHub Login
+Go to  [**NeSI OnDemand**](https://ondemand.nesi.org.nz/). It will automatically take you to the Tuakiri login screen.
 
-The easiest method for accessing the NeSI cluster is to use our JupyterHub service.  Below are the 
-login and troubleshooting instructions for NeSI JupyterHub:
+### If you haven't logged into NeSI OnDemand or HPC3 before
 
-1. Follow this link: [https://jupyter.nesi.org.nz](https://jupyter.nesi.org.nz)
-2. Enter your NeSI username, HPC password your 6 digit second factor token ![Login](/fig/Login_jupyterhubNeSI.png)
-3. Choose server options: the session project code should be *NeSI Training ({{site.sched.project}})*, Number of CPUs and memory size will remain unchanged. However, select the appropriate **Wall time** based on the projected length of a session ![Options](/fig/ServerOptions_jupyterhubNeSI.png)
-4. From Jupyter Launcher screen, choose Terminal (highlighted in red box) ![Terminal](/fig/jupyterLauncher.png)
+The login process will include a step to setup a new 2FA (Two Factor Authentication)
 
-<br>
+![image-20240903-110950](https://github.com/user-attachments/assets/2eccbaad-cd70-489b-9938-663f3fd30082)
 
-## Accessing the Cluster and Running Jobs
+* Select your affiliated institution, and log in using your institutional account. Example below shows the University of Auckland login screen.
+* ![image-20240903-111115 (1)](https://github.com/user-attachments/assets/d1006331-8128-421a-b678-16b29fe74a0e)
 
-### Jupyter for Interactive work.
+    After logging in, you will be asked to set up your OTP (one-time password) for NeSI. This is an OTP in addition to your institutional 2FA. We are currently enforcing an additional layer of OTP to make sure our system is secure, as the institutions federated by Tuakiri all have different security policies.
 
-![Terminal](/fig/UsingJupyterHub2.svg)
-In a web browser, navigate to [https://jupyter.nesi.org.nz](https://jupyter.nesi.org.nz), select the resource requirements *for your job*. Jobs are run interactively.  
+    ![image-20240903-111555](https://github.com/user-attachments/assets/4ba7b6bd-a5de-4fc9-a11a-f52154f5587b)
 
-**Best For:** New Users, Job and code tests and Jobs using < 4 CPUs and < 128GB
+    Scan the barcode with your preferred authenticator app (e.g. Google Authenticator), and enter the one-time code (6 digit number) along with a device name (e.g. my mobile) and Submit and you are good to go.
 
-**Advantages:** Interactive, file explorer, no local setup required.
+    Once you have already set up NeSI OTP, you will be shown the following screen instead of the one above, where you can enter the 6 digit number from your authenticator app.
 
-### Jupyter and SBATCH
+    ![image-20240903-111247](https://github.com/user-attachments/assets/8d84be5d-347f-4a86-8b35-576cb55ffdee)
+
+    After successfully logging in, you will be presented with the following NeSI OnDemand screen.
+
+    ![image-20240903-112029](https://raw.githubusercontent.com/nesi/support-docs/main/docs/assets/images/OOD_Desktop_08Jun2025.png)
+
+### OnDemand home page
+
+![ondemandhome](../../assets/images/OOD_desktop.png)
+    1. <kbd>Files</kbd> > <kbd>Home Directory</kbd> : Access to OnDemand file explorer
+        - Default landing path for the file explorer is your home directory
+        - There is a <kbd>00_nesi_projects</kbd> directory within home which contains symlinks to all project and nobackup directories you have access to. Refer to [How to access your project OR nobackup directory from the Interactive file explorer](#how-to-access-your-project-or-nobackup-directory-from-the-interactive-file-explorer)
+    2. <kbd>Clusters</kbd>><kbd>>_NeSI HPC Shell Access</kbd>
+        - Allows us to access HPC login nodes directly from OnDemand 
+    3. <kbd>My Interactive Sessions</kbd>
+        - List all of the currently running sessions associated with my user account
+    4. **Applications**
+        - Currently available apps for interactive computing 
 
 
-![Terminal](/fig/UsingJupyterHub3.svg)
-In a web browser, navigate to [https://jupyter.nesi.org.nz](https://jupyter.nesi.org.nz), select the resource requirements *for your session* (should only need minimal memory and CPU).  Jobs scripts are submitted using the `sbatch` command (non-interactive).  
+## How to access your project OR nobackup directory from the Interactive file explorer
 
-**Best For:** New Users, Windows Users.  
+* If you would like to access your project or nobackup file system via the Interactive file explorer ( not the terminal), please use the <kbd>00_nesi_project</kbd> parent directory whcih containts symlinks to all file systems you have access to 
 
-**Advantages:** File explorer, no local setup required.
+### Access from OnDemand Files app
 
-### SSH and SBATCH
-
-![Terminal](/fig/UsingJupyterHub1.svg)
-From your local computer, using an SSH client to connect to a shell session (interactive), running on the NeSI login Node. Jobs scripts are submitted using the `sbatch` command (non-interactive).  Instructions for SSH and command-line setup can be found in our documentation: [Accessing the HPCs](https://docs.nesi.org.nz/Getting_Started/Accessing_the_HPCs/Setting_Up_and_Resetting_Your_Password/)
-
-**Best For:** Users familiar with command line, Linux/Mac users.  
-
-**Advantages:** Most flexible.  
+<p align="center">
+<img src="https://raw.githubusercontent.com/nesi/support-docs/main/docs/assets/images/OOD_files_app.png" alt="image-20240903-112029" width="1000">
+</p>
