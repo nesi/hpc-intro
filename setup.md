@@ -33,7 +33,7 @@ The login process will include a step to setup a new 2FA (Two Factor Authenticat
 
 ### OnDemand home page
 
-![ondemandhome](../../assets/images/OOD_desktop.png)
+![ondemandhome](https://docs.nesi.org.nz/assets/images/OOD_desktop.png)
     1. <kbd>Files</kbd> > <kbd>Home Directory</kbd> : Access to OnDemand file explorer
         - Default landing path for the file explorer is your home directory
         - There is a <kbd>00_nesi_projects</kbd> directory within home which contains symlinks to all project and nobackup directories you have access to. Refer to [How to access your project OR nobackup directory from the Interactive file explorer](#how-to-access-your-project-or-nobackup-directory-from-the-interactive-file-explorer)
