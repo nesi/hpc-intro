@@ -129,9 +129,9 @@ Depending on how you are accessing the HPC the modules you have loaded by defaul
 ```
 
 The following modules were not unloaded:
-   (Use "module --force purge" to unload all):
+  (Use "module --force purge" to unload all):
 
-  1) XALT/minimal   2) slurm   3) NeSI
+  1) NeSI/zen3
 ```
 {: .output}
 
