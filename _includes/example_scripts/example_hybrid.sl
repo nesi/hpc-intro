@@ -5,9 +5,9 @@
 #SBATCH --output          %x.out
 #SBATCH --mem-per-cpu     500
 #SBATCH --ntasks          2
-#SBATCH --cpus-per-task   4
+#SBATCH --cpus-per-task   2
 
 module purge
-module load R/4.3.1-gimkl-2022a
+module load R
 srun Rscript sum_matrix.r
 echo "Done!"
