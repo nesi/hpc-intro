@@ -41,7 +41,7 @@ Shared-memory multiproccessing divides work among _CPUs_ or _threads_, all of th
 
 Often called *Multithreading*.
 
-This means that all CPUs must be on the same node, most Mahuika nodes have 72 CPUs.
+This means that all CPUs must be on the same node, most Mahuika nodes have 128 CPUs.
 
 Shared memory parallelism is used in our example script `{{ site.example.script }}`.
 
@@ -58,8 +58,6 @@ Each task has it's own exclusive memory, tasks can be spread across multiple nod
 Distributed-Memory multiproccessing predates shared-memory multiproccessing, and is more common with classical high performance applications (older computers had one CPU per node).
 
 Number of tasks to use is specified by the Slurm option `--ntasks`, because the number of tasks ending up on one node is variable you should use `--mem-per-cpu` rather than `--mem` to ensure each task has enough.
-
-Tasks cannot share cores, this means in most circumstances leaving `--cpus-per-task` unspecified will get you `2`.
 
 Using a combination of Shared and Distributed memory is called _Hybrid Parallel_.
 
