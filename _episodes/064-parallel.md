@@ -1,7 +1,7 @@
 ---
 title: "What is Parallel Computing"
 teaching: 20
-exercises: 10
+exercises: 15
 questions:
 - "How do we execute a task in parallel?"
 - "What benefits arise from parallel execution?"
