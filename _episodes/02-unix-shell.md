@@ -57,34 +57,26 @@ The directories that are relevant to us are.
 <tr>
 <td style="width: 300px;"></td>
 <td style="width: 250px;">Location</td>
-<td style="width: 167.562px;">Default Storage</td>
-<td style="width: 142.734px;">Default Files</td>
-<td style="width: 89.3594px;">Backup</td>
-<td style="width: 155.188px;">Access Speed</td>
+<td style="width: 200px;">Default Storage</td>
+<td style="width: 100px;">Backup</td>
 </tr>
 <tr>
 <td style="width: 300px;"><strong>Home</strong> is for user-specific files such as configuration files, environment setup, source code, etc.</td>
 <td style="width: 250px;"><code>/home/&lt;username&gt;</code></td>
-<td style="width: 167.562px;">20GB</td>
-<td style="width: 142.734px;">1,000,000</td>
-<td style="width: 89.3594px;">Daily</td>
-<td style="width: 155.188px;">Normal</td>
+<td style="width: 200px;">20GB</td>
+<td style="width: 100px;">Daily</td>
 </tr>
 <tr>
 <td style="width: 300px;"><strong>Project</strong> is for persistent project-related data, project-related software, etc.</td>
 <td style="width: 250px;"><code>/nesi/project/&lt;projectcode&gt;</code></td>
-<td style="width: 167.562px;">100GB</td>
-<td style="width: 142.734px;">100,000</td>
-<td style="width: 89.3594px;">Daily</td>
-<td style="width: 155.188px;">Normal</td>
+<td style="width: 200px;">100GB</td>
+<td style="width: 100px;">Daily</td>
 </tr>
 <tr>
 <td style="width: 300px;"><strong>Nobackup</strong> is a 'scratch space', for data you don't need to keep long term. Old data is periodically deleted from nobackup</td>
 <td style="width: 250px;"><code>/nesi/nobackup/&lt;projectcode&gt;</code></td>
-<td style="width: 167.562px;">10TB</td>
-<td style="width: 142.734px;">1,000,000</td>
-<td style="width: 89.3594px;">None</td>
-<td style="width: 155.188px;">Fast</td>
+<td style="width: 200px;">10TB</td>
+<td style="width: 100px;">None</td>
 </tr>
 </tbody>
 </table>
@@ -97,8 +89,6 @@ Protecting critical data from corruption or deletion is primarily your
 responsibility. Ensure you have a data management plan and stick to the plan to reduce the chance of data loss.  Also important is managing your storage quota.  To check your quotas, use the `nn_storage_quota` command, eg
 
 {% include {{ site.snippets }}/filedir/sinfo.snip %}
-
-As well as disk space, 'inodes' are also tracked, this is the *number* of files.
 
 Notice that the project space for this user is over quota and has been locked, meaning no more data can be added.  When your space is locked you will need to move or remove data.  Also note that none of the nobackup space is being used.  Likely data from project can be moved to nobackup. `nn_storage_quota` uses cached data, and so will no immediately show changes to storage use.
 
