@@ -2,11 +2,11 @@
 
 #SBATCH --job-name      example_job
 #SBATCH --account       nesi99991
-#SBATCH --mem           600M
+#SBATCH --mem           1200M
 #SBATCH --time          00:10:00
 #SBATCH --cpus-per-task 4
 
 module purge
-module load R/4.3.1-gimkl-2022a
+module load R
 Rscript sum_matrix.r
 echo "Done!"
