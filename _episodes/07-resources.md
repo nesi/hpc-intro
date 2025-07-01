@@ -20,7 +20,7 @@ math: True
 ## What Resources?
 
 Last time we submitted a job, we did not specify a number of CPUs, and therefore
-we were provided the default of `2` (1 _core_).
+we were provided the default of `1`.
 
 As a reminder, our slurm script `example_job.sl` currently looks like this.
 
@@ -31,7 +31,7 @@ As a reminder, our slurm script `example_job.sl` currently looks like this.
 {: .language-bash}
 
 We will now submit the same job again with more CPUs.
-We ask for more CPUs using by adding `#SBATCH --cpus-per-task 4` to our script.
+We ask for more CPUs using by adding `#SBATCH --cpus-per-task 2` to our script.
 Your script should now look like this:
 
 ```
