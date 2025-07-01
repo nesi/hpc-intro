@@ -28,12 +28,12 @@ remote:
   name: "mahuika"
   login: "nesi.org.nz"
   portal: ""
-  host: "mahuika02"
-  node: "mahuika02"
-  location: "Greta Point Datacenter"
+  host: "login01"
+  node: "login01"
+  location: "Tamaki Data Center"
   homedir: "/home"
   user: "yourUsername"
-  prompt: "[yourUsername@mahuika ~]$"
+  prompt: "[yourUsername@login01 ~]$"
   bash_shebang: "#!/bin/bash -e"
   module_python3: "Python"
 
@@ -87,7 +87,7 @@ episode_order:
   - 064-parallel
   - 08-break2
   - 07-resources
-  - 09-scaling
+  # - 09-scaling
 
 
 
@@ -121,11 +121,11 @@ kind: "lesson"
 # Workshop working directory.
 working_dir:
   - /nesi/nobackup/nesi99991
-  - introhpc2503
+  - resbaz25
 
 # Start time in minutes (0 to be clock-independent, 540 to show a start at 09:00 am).
 # 600 is 10am
-start_time: 600
+start_time: 540
 # Start time for people wanting to skip bash content
 hpc_start_time: 780
 # Lesson to start at.
