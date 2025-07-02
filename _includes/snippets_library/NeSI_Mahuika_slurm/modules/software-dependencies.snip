@@ -6,14 +6,20 @@ To demonstrate, let's use `module list`.
 {: .language-bash}
 
 ```
-Currently Loaded Modules:
-  1) XALT/minimal                       8) GCC/11.3.0                 15) gimpi/2022a                     22) libreadline/8.1-GCCcore         29) Java/17
-  2) slurm                              9) libpmi/2-slurm             16) imkl-FFTW/2022.0.2-gimpi-2022a  23) libpng/1.6.37-GCCcore           30) nodejs/16.15.1-GCCcore-11.3.0
-  3) NeSI                         (S)  10) numactl/2.0.14-GCC-11.3.0  17) gimkl/2022a                     24) libxml2/2.9.10-GCCcore-11.3.0   31) OpenSSL/1.1.1k-GCCcore-11.3.0
-  4) LegacySystemLibs/7                11) UCX/1.12.1-GCC-11.3.0      18) bzip2/1.0.8-GCCcore-11.3.0      25) SQLite/3.36.0-GCCcore-11.3.0    32) R/4.2.1-gimkl-2022a
-  5) GCCcore/11.3.0                    12) impi/2021.5.1-GCC-11.3.0   19) XZ/5.2.5-GCCcore-11.3.0         26) cURL/7.83.1-GCCcore-11.3.0
-  6) zlib/1.2.11-GCCcore-11.3.0        13) AlwaysIntelMKL/1.0         20) PCRE2/10.40-GCCcore-11.3.0      27) NLopt/2.7.0-GCC-11.3.0
-  7) binutils/2.38-GCCcore-11.3.0      14) imkl/2022.0.2              21) ncurses/6.2-GCCcore-11.3.0      28) GMP/6.2.1-GCCcore-11.3.0
+  1) NeSI/zen3                     (S)  12) FFTW/3.3.10-GCC-12.3.0          23) SQLite/3.42.0-GCCcore-12.3.0
+  2) GCCcore/12.3.0                     13) gompi/2023a                     24) OpenSSL/1.1
+  3) zlib/1.2.13-GCCcore-12.3.0         14) FFTW.MPI/3.3.10-gompi-2023a     25) cURL/8.3.0-GCCcore-12.3.0
+  4) binutils/2.40-GCCcore-12.3.0       15) ScaLAPACK/2.2.0-gompi-2023a-fb  26) NLopt/2.7.1-GCC-12.3.0
+  5) GCC/12.3.0                         16) foss/2023a                      27) GMP/6.2.1-GCCcore-12.3.0
+  6) numactl/2.0.16-GCCcore-12.3.0      17) bzip2/1.0.8-GCCcore-12.3.0      28) Java/20.0.2
+  7) UCX/1.18.1-GCCcore-12.3.0          18) XZ/5.4.2-GCCcore-12.3.0         29) libgit2/1.6.4-GCC-12.3.0
+  8) UCC/1.3.0-GCCcore-12.3.0           19) PCRE2/10.42-GCCcore-12.3.0      30) nodejs/18.18.2-GCCcore-12.3.0
+  9) OpenMPI/4.1.5-GCC-12.3.0           20) ncurses/6.4-GCCcore-12.3.0      31) LibTIFF/4.4.0-GCCcore-12.3.0
+ 10) OpenBLAS/0.3.23-GCC-12.3.0         21) libreadline/8.2-GCCcore-12.3.0  32) R/4.3.2-foss-2023a
+ 11) FlexiBLAS/3.3.1-GCC-12.3.0         22) libxml2/2.11.4-GCCcore-12.3.0
+
+  Where:
+   S:  Module is Sticky, requires --force to unload or purge
 ```
 {: .output}
 
