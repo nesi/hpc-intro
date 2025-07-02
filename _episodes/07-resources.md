@@ -32,6 +32,12 @@ As a reminder, our slurm script `example_job.sl` currently looks like this.
 
 We will now submit the same job again with more CPUs.
 We ask for more CPUs using by adding `#SBATCH --cpus-per-task 4` to our script.
+In order to help keep track of our different jobs, we can change `--job-name` to something else e.g. `4cpus`.
+We will also add `#SBATCH --output %x.out`. `--output` allows you to specify the name of the file where the stdout will be sent.
+`%x` is a token standing in for `--job-name` (saves us renaming the output file if we change the job name),
+so in this case the output file will be `4cpus.out`.
+
+
 Your script should now look like this:
 
 ```
