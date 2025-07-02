@@ -31,7 +31,7 @@ As a reminder, our slurm script `example_job.sl` currently looks like this.
 {: .language-bash}
 
 We will now submit the same job again with more CPUs.
-We ask for more CPUs using by adding `#SBATCH --cpus-per-task 2` to our script.
+We ask for more CPUs using by adding `#SBATCH --cpus-per-task 4` to our script.
 Your script should now look like this:
 
 ```
@@ -58,7 +58,7 @@ And then submit using `sbatch` as we did before.
 > Exit `watch` with <kbd>ctrl</kbd> + <kbd>c</kbd>.
 {: .callout}
 
-Note in squeue, the number under cpus, should be '4'.
+Note in squeue, the number under cpus, should be '8'.
 
 Checking on our job with `sacct`.
 Oh no!
