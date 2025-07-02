@@ -1,9 +1,10 @@
 #!/bin/bash -e
 
-#SBATCH --job-name      example_job
+#SBATCH --job-name      4cpu_job
 #SBATCH --account       nesi99991
+#SBATCH --output        %x.out
 #SBATCH --mem           1200M
-#SBATCH --time          00:10:00
+#SBATCH --time          00:15:00
 #SBATCH --cpus-per-task 4
 
 module purge
