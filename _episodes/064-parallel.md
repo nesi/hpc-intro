@@ -61,6 +61,18 @@ Number of tasks to use is specified by the Slurm option `--ntasks`, because the 
 
 Using a combination of Shared and Distributed memory is called _Hybrid Parallel_.
 
+> ## srun
+>
+> In order to use distrubuted memory parallelism under Slurm, most commands must be prefixed with `srun`.
+> 
+> For example `srun Rscript sum_matrix.r`.
+> 
+> We _do not_ need to prefix commands that do not need access to the distrubuted CPUs, 'echo', 'module load', etc.
+> Some scientific software will have an equivalent built in and may not require `srun`,
+> The best place to look for this information is the software user documentation, or the NeSI support docs.  
+{: .callout}
+
+<!-- 
 ### GPGPU's
 
 GPUs compute large number of simple operations in parallel, making them well suited for Graphics Processing (hence the name), or any other large matrix operations.
@@ -131,6 +143,7 @@ Depending on the GPU type, we *may* also need to specify a partition using `--pa
 > > {: .output}
 > {: .solution}
 {: .challenge}
+--> 
 
 ### Job Array
 
