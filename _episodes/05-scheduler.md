@@ -80,15 +80,20 @@ We can now run this script using
 {: .language-bash}
 
 ```
-Loading required package: foreach
-Loading required package: iterators
-Loading required package: parallel
-[1] "Using 1 cpus to sum [ 2.000000e+04 x 2.000000e+04 ] matrix."
-[1] "0% done..."
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) NeSI/zen3
+Running non-MPI task
+Shared Memory Running on 'login01.hpc.nesi.org.nz' with 1 CPU(s)
+Summing [ 6.000000e+04 x 4.000000e+04 ] matrix, seed = '0'
+ 1% done...
+ 2% done...
 ...
-[1] "99% done..."
-[1] "100% done..."
-[1] "Sum is '10403.632886'."
+ 98% done...
+ 99% done...
+ 100% done...
+(Non-MPI) Sums to -29910.135471
 Done!
 ```
 {: .output}
