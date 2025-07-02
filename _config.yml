@@ -83,7 +83,7 @@ episode_order:
   - 03-break1
   - 04-modules
   - 05-scheduler
-  - 06-break2
+  - 08-break2
   - 07-resources
   - 064-parallel
   # - 09-scaling
