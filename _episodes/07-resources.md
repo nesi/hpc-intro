@@ -64,7 +64,6 @@ Checking on our job with `sacct`.
 Oh no!
 
 {% include {{ site.snippets }}/scaling/OOM.snip %}
-{: .language-bash}
 
 To understand why our job failed, we need to talk about the resources involved.
 
