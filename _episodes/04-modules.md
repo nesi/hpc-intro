@@ -212,7 +212,7 @@ there are a lot more directories at the beginning. When we
 ran the `module load` command, it added many directories to the beginning of our
 `$PATH`.
 
-The path to NeSI XALT utility will normally show up first.  This helps us track software usage, but the more important directory is the second one: `/opt/nesi/CS400_centos7_bdw/R/4.2.1-gimkl-2022a/bin` Let's examine what's there:
+You may have noticed that the first directory to appear is `/opt/nesi/zen3/R/4.3.2-foss-2023a/bin`. Let's examine what's there:
 
 {% include {{ site.snippets }}/modules/r-ls-dir-command.snip %}
 
@@ -229,9 +229,9 @@ Before moving onto the next session lets use `module purge` again to return to t
 
 ```
 The following modules were not unloaded:
-   (Use "module --force purge" to unload all):
+  (Use "module --force purge" to unload all):
 
-  1) XALT/minimal   2) slurm   3) NeSI
+  1) NeSI/zen3
 ```
 {: .output}
 
