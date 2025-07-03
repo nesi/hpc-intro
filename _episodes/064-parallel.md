@@ -57,7 +57,7 @@ Each task has it's own exclusive memory, tasks can be spread across multiple nod
 
 Distributed-Memory multiproccessing predates shared-memory multiproccessing, and is more common with classical high performance applications (older computers had one CPU per node).
 
-Number of tasks to use is specified by the Slurm option `--ntasks`, because the number of tasks ending up on one node is variable you should use `--mem-per-cpu` rather than `--mem` to ensure each task has enough.
+Number of tasks to use is specified by the Slurm option `--ntasks`, because the number of tasks ending up on one node is variable you should use `--mem-per-cpu` rather than `--mem` (mem per node) to ensure each task has enough.
 
 Using a combination of Shared and Distributed memory is called _Hybrid Parallel_.
 
@@ -145,17 +145,24 @@ Depending on the GPU type, we *may* also need to specify a partition using `--pa
 {: .challenge}
 --> 
 
-### Job Array
+### Embarrassingly Parallel
 
-Job arrays are not "multiproccessing" in the same way as the previous two methods.
-Ideal for _embarrassingly parallel_ problems, where there are little to no dependencies between the different jobs.
+Possible when tasks are independant and no communication between them is required.
+
+e.g. parameter sweeps and Monte Carlo simulations.
 
 Can be thought of less as running a single job in parallel and more about running multiple serial-jobs simultaneously.
 Often this will involve running the same process on multiple inputs.
 
 Embarrassingly parallel jobs should be able to scale without any loss of efficiency. If this type of parallelisation is an option, it will almost certainly be the best choice.
 
+The best way to run embarrassingly parallel jobs in Slurm is using a Job Array. 
+Job arrays allow one script to be executed many times in a way that is convenient to submit and manage.
+
 A job array can be specified using `--array`
+
+If you are specifying `--output` you will probably want to make use of the `%a` token, so that each output file contains the array ID. 
+e.g. `--output %x_%a.out` will create the output `<job name>_<array ID>.out`.
 
 If you are writing your own code, then this is something you will probably have to specify yourself.
 
