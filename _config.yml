@@ -86,7 +86,8 @@ episode_order:
   - 08-break2
   - 07-resources
   - 064-parallel
-  # - 09-scaling
+  - 08-break3
+  - 09-scaling
 
 
 
