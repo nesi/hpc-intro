@@ -1,7 +1,7 @@
 ---
 title: "Scaling"
 teaching: 10
-exercises: 35
+exercises: 30
 questions:
 - "How do we go from running a job on a small number of CPUs to a larger one."
 objectives:
