@@ -33,7 +33,7 @@ remote:
   location: "Tamaki Data Center"
   homedir: "/home"
   user: "yourUsername"
-  prompt: "10:00:00 login01 /nesi/project/nesi99991/resbaz25 $"
+  prompt: "10:00:00 login01 /nesi/project/nesi99991/introhpc2510 $"
   bash_shebang: "#!/bin/bash -e"
   module_python3: "Python"
 
@@ -120,8 +120,8 @@ kind: "lesson"
 
 # Workshop working directory.
 working_dir:
-  - /nesi/nobackup/nesi99991
-  - resbaz25
+  - /nesi/project/nesi99991
+  - introhpc2510
 
 # Start time in minutes (0 to be clock-independent, 540 to show a start at 09:00 am).
 # 600 is 10am
