@@ -106,7 +106,7 @@ a command is important.
 First, let's find out where we are by running the command `pwd` for '**p**rint **w**orking **d**irectory'.
 
 ```
-{{ site.remote.prompt }} pwd
+{{ site.remote.prompt_home }} pwd
 ```
 
 {: .language-bash}
@@ -153,7 +153,7 @@ We will now list the contents of the directory we we will be working from. We ca
 use the following command to do this:
 
 ```
-{{ site.remote.prompt }} ls {{ site.working_dir[0] }}
+{{ site.remote.prompt_home }} ls {{ site.working_dir[0] }}
 ```
 
 {: .language-bash}
@@ -214,7 +214,7 @@ The `cd` command is akin to double clicking a folder in a graphical interface.
 We will use the following command:
 
 ```
-{{ site.remote.prompt }} cd {{ site.working_dir | join: '/' }}
+{{ site.remote.prompt_home }} cd {{ site.working_dir | join: '/' }}
 ```
 
 {: .language-bash}
@@ -362,7 +362,7 @@ We will now navigate to the parent directory, the simplest way do this is to use
 We should now be back in `{{ site.working_dir[0] }}`.
 
 ```
-{{ site.remote.prompt }} pwd
+{{ site.remote.prompt_project }} pwd
 ```
 
 {: .language-bash}
@@ -383,7 +383,7 @@ We should now be back in `{{ site.working_dir[0] }}`.
 For example, if you type:
 
 ```
-{{ site.remote.prompt }} cd {{ site.working_dir | last | slice: 0,3 }}
+{{ site.remote.prompt_project }} cd {{ site.working_dir | last | slice: 0,3 }}
 ```
 {: .language-bash}
 
@@ -391,7 +391,7 @@ and then press <kbd>Tab</kbd> (the tab key on your keyboard),
 the shell automatically completes the directory name for you (since there is only one possible match):
 
 ```
-{{ site.remote.prompt }} cd {{ site.working_dir | last }}/
+{{ site.remote.prompt_project }} cd {{ site.working_dir | last }}/
 ```
 {: .language-bash}
 
@@ -409,7 +409,7 @@ Now entering in the first few characters of the path (just enough that the possi
  Now press <kbd>Enter</kbd> to execute the command.
 
 ```
-{{ site.remote.prompt }} cd {{ site.working_dir | last }}/<username>
+{{ site.remote.prompt_project }} cd {{ site.working_dir | last }}/<username>
 ```
 {: .language-bash}
 
@@ -530,7 +530,7 @@ directories "backup" and "thing"; "/Users/backup" contains "original",
 >
 >```
 >{{ site.remote.prompt }} cd {{ site.working_dir | join: '/' }}/birds
->{{ site.remote.prompt }} ls
+>{{ site.remote.prompt_birds }} ls
 >```
 > {: .language-bash}
 >
@@ -542,7 +542,7 @@ directories "backup" and "thing"; "/Users/backup" contains "original",
 > In this example there aren't many files, but it is easy to imagine a situation where you have hundreds or thousads of files you need to filter through, and globbing is the perfect tool for this. Using the wildcard character the command
 >
 >```
->{{ site.remote.prompt }} ls ka*
+>{{ site.remote.prompt_birds }} ls ka*
 >```
 > {: .language-bash}
 >
@@ -556,7 +556,7 @@ directories "backup" and "thing"; "/Users/backup" contains "original",
 > Since the pattern `ka*` will match `kaka.txt`and `kakapo.jpeg` as these both start with "ka". While the command:
 >
 >```
->{{ site.remote.prompt }} ls *.jpeg
+>{{ site.remote.prompt_birds }} ls *.jpeg
 >```
 > {: .language-bash}
 >
@@ -571,7 +571,7 @@ directories "backup" and "thing"; "/Users/backup" contains "original",
 > You can use multiple wildcards as well with the command:
 >
 >```
->{{ site.remote.prompt }} ls k*a.*
+>{{ site.remote.prompt_birds }} ls k*a.*
 >```
 > {: .language-bash}
 >
@@ -587,7 +587,7 @@ directories "backup" and "thing"; "/Users/backup" contains "original",
 > `?` is also a wildcard, but it matches exactly one character. So the command:
 >
 >```
->{{ site.remote.prompt }} ls ????.*
+>{{ site.remote.prompt_birds }} ls ????.*
 >```
 > {: .language-bash}
 >
