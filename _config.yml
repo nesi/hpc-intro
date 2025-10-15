@@ -33,7 +33,7 @@ remote:
   location: "Tamaki Data Center"
   homedir: "/home"
   user: "yourUsername"
-  prompt: "10:00:00 login01 /nesi/project/nesi99991/introhpc2510 $"
+  prompt: "10:00:00 login01 $"
   bash_shebang: "#!/bin/bash -e"
   module_python3: "Python"
 
