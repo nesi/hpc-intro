@@ -1,3 +1,6 @@
+# DEPRECATION NOTICE
+
+We will no longer be maintaining this material, in favor of keeping an up to date version in our [Support documentation](https://docs.nesi.org.nz/Tutorials/Introduction_To_HPC/What_is_an_HPC/).
 
 ### For NeSI developers:
 
